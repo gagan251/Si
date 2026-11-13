@@ -13,7 +13,16 @@
 html,body{height:100%}
 body{margin:0;overflow:hidden;background:#BE1E2D;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
 .stage{position:fixed;inset:0;overflow:hidden;background:#BE1E2D}
-@media (orientation:portrait){.stage{inset:auto;top:0;left:100vw;width:100vh;height:100vw;transform-origin:0 0;transform:rotate(90deg)}}
+/* Portrait phones: no rotation; the whole village fits the screen width and a title fills the sky */
+.ptitle{display:none}
+@media (orientation:portrait){
+.ptitle{display:block;position:absolute;left:0;right:0;top:calc(env(safe-area-inset-top,0px) + 7vh);text-align:center;pointer-events:none;font-family:'Mountains of Christmas',Georgia,serif;font-weight:700;line-height:1.15;padding:0 16px;z-index:2}
+.ptitle span{display:block;font-size:clamp(24px,8.5vw,44px);color:#fff;text-shadow:0 2px 6px rgba(80,0,10,.55)}
+.ptitle b{display:block;font-size:clamp(30px,11vw,58px);background:linear-gradient(180deg,#fffbe0,#F7D774 50%,#d79a2b);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 3px rgba(80,0,10,.6))}
+.ptitle small{display:block;margin-top:6px;font-size:clamp(18px,6vw,30px);color:#ffe9b0;text-shadow:0 2px 4px rgba(80,0,10,.5)}
+.cart-page-bottom .wb{font-size:calc(var(--ch)*.05)}
+.rp{right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px))}
+}
 .stage svg{display:block;width:100%;height:100%}
 .snow{position:absolute;inset:0;pointer-events:none}
 .snow i{position:absolute;top:-8px;border-radius:50%;background:#fff;opacity:0;animation:fall linear infinite}
@@ -236,6 +245,7 @@ body{margin:0;overflow:hidden;background:#BE1E2D;font-family:system-ui,-apple-sy
 <path fill="#EF003F" d="M633.2,40.6c7,0.8,88.8,35.1,107.5,71.2c18.7,36.1,12.7,108.7,0,145.7c-12.7,37-73.1,88.8-112.5,91.7c-39.5,2.9-170-47.4-187-80.9c-16.9-33.5-7.3-106.8,9.9-141.4C468.3,92.4,518.5,27.5,633.2,40.6z"/>
 <g fill="#B7162A"><path d="M1092,0c0,0,69.8,37.6,83.9,58.6S1200,142,1200,142V0H1092z"/><path d="M1200,407.2c0,0-23.1,131.2-84.5,173.5c-61.4,42.2-52.6,57.9-52.6,57.9l137.2-20V407.2z"/><path d="M115,0c0,0-48.8,30-63.9,48.7C36,67.3,0,152.5,0,152.5V0H115z"/><path d="M0,487.8c0,0,25.3,88.7,68.7,111.7c43.4,23,58.3,40.5,61.8,41.3C134,641.5,0,641.2,0,641.2V487.8z"/></g>
 <g id="moon"><circle cx="600.8" cy="191.3" r="132" fill="#FFFAD7"/><g fill="#F2E69E"><circle cx="555" cy="150" r="19"/><circle cx="652" cy="236" r="27"/><circle cx="622" cy="148" r="9"/><circle cx="548" cy="236" r="12"/><circle cx="670" cy="160" r="7"/></g></g>
+<g id="sky" fill="#fff"></g>
 <g fill="#fff"><use href="#s" x="875" y="250" class="tw"/><use href="#s" x="245" y="240" class="tw"/><use href="#s" x="70" y="55" class="tw"/><use href="#s" x="1087" y="152" class="tw"/><use href="#s" x="954" y="30" class="tw"/><use href="#s" x="326" y="90" class="tw"/><circle cx="268" cy="56" r="2"/><circle cx="380" cy="86" r="2"/><circle cx="478" cy="97" r="2"/><circle cx="373" cy="188" r="3"/><circle cx="792" cy="245" r="3"/><circle cx="892" cy="38" r="2.5"/><circle cx="949" cy="85" r="2.5"/><circle cx="1138" cy="243" r="1.5"/><circle cx="162" cy="400" r="1.5"/><circle cx="58" cy="160" r="3"/><circle cx="1098" cy="328" r="2"/><circle cx="624" cy="29" r="2.3"/></g>
 <use href="#cl" fill="#fff"/><use href="#cl" fill="#fff" transform="translate(560 -10) scale(.8)"/>
 <g fill="#fff" opacity=".4"><use href="#h" x="160" y="575"/><use href="#h" x="400" y="570"/><use href="#h" x="720" y="575"/><use href="#h" x="1010" y="570"/><use href="#t" x="270" y="578"/><use href="#t" x="570" y="575"/><use href="#t" x="870" y="578"/><use href="#t" x="1110" y="575"/></g>
@@ -302,6 +312,7 @@ body{margin:0;overflow:hidden;background:#BE1E2D;font-family:system-ui,-apple-sy
 <g id="bubble"><polygon id="tail" fill="#fff" stroke="#F2C14E" stroke-width="3"/><rect id="brect" y="-26" height="52" rx="26" fill="#fff" stroke="#F2C14E" stroke-width="3"/><text id="btxt" y="9" text-anchor="middle" fill="#B7162A" font-family="'Mountains of Christmas',Georgia,serif" font-size="28" font-weight="700"></text></g>
 <g id="burst"></g>
 </svg>
+<div class="ptitle" aria-hidden="true"><span>Happy Birthday</span><b>Vo Thi S.Ny</b><small>&amp; Merry Christmas</small></div>
 <div class="snow" id="snow" aria-hidden="true"></div>
 <div class="cardwrap" id="cardwrap" role="dialog" aria-label="Birthday and Christmas card">
 <div class="dim" id="dim"></div>
@@ -492,6 +503,7 @@ var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').mat
 if(!reduce){for(var i=0;i<46;i++){var f=document.createElement('i'),s=2+Math.random()*3.5;f.style.cssText='left:'+(Math.random()*100)+'%;width:'+s+'px;height:'+s+'px;animation-duration:'+(6+Math.random()*7)+'s;animation-delay:-'+(Math.random()*12)+'s;--dx:'+(20+Math.random()*70)+'px';snow.appendChild(f);}}
 var P=[[-58,-38],[-30,-30],[0,-40],[30,-30],[58,-38],[-30,-68],[30,-70],[-44,-98],[-20,-90],[8,-100],[40,-96],[-20,-130],[22,-128],[-30,-150],[0,-146],[28,-152],[-12,-175],[14,-180]],BC=['#ff3b5c','#ffd75e','#5cc8ff','#ff9ad5','#ffffff'];
 P.forEach(function(p,i){[['halo',9,.8],['core',3.6,1]].forEach(function(q){var c=document.createElementNS('http://www.w3.org/2000/svg','circle');c.setAttribute('cx',p[0]);c.setAttribute('cy',p[1]);c.setAttribute('r',q[1]);c.setAttribute('fill',BC[i%BC.length]);c.setAttribute('opacity',q[2]);c.setAttribute('class','b');c.style.animationDelay=(i*0.23)+'s';$(q[0]).appendChild(c);});});
+var k=1,vb0=0,svgEl=document.querySelector('.stage svg');
 function say(t){note.textContent=t}
 function at(ms,fn){timers.push(setTimeout(fn,ms))}
 var ns='http://www.w3.org/2000/svg',cols=['#F2C14E','#ffffff','#F2E69E','#EF003F','#35b872'];
@@ -512,7 +524,7 @@ var o=document.createElementNS(ns,'g'),g=document.createElementNS(ns,'g');
 o.setAttribute('transform','translate('+(80+Math.random()*1040)+' 840)');
 g.innerHTML='<path d="M0 0Q-6 30 0 60" stroke="#fff" stroke-width="1.5" fill="none"/><ellipse cx="0" cy="-26" rx="22" ry="28" fill="'+bc[k%bc.length]+'"/><ellipse cx="-8" cy="-36" rx="5" ry="8" fill="#fff" opacity=".45"/>';
 o.appendChild(g);burst.appendChild(o);
-if(g.animate)g.animate([{transform:'translateY(0)'},{transform:'translateY(-1050px)'}],{duration:5500+Math.random()*3000,delay:Math.random()*1800,easing:'ease-out',fill:'forwards'});
+if(g.animate)g.animate([{transform:'translateY(0)'},{transform:'translateY(-'+(900-vb0)+'px)'}],{duration:5500+Math.random()*3000,delay:Math.random()*1800,easing:'ease-out',fill:'forwards'});
 }}
 function reset(){timers.forEach(clearTimeout);timers=[];if(window.speechSynthesis)speechSynthesis.cancel();sleigh.classList.remove('leave','landed');santa.classList.remove('talk','gone');sgift.classList.remove('gone');walker.classList.remove('walk','back','talk','gave','cakemode');dbox.classList.remove('show','ready','open','poof');cake.classList.remove('show','ready','cut','out');cake.setAttribute('tabindex','-1');g2.classList.remove('show','ready','open');g2.setAttribute('tabindex','-1');lightsOff();fdone=false;dbox.setAttribute('tabindex','-1');cwrap.classList.remove('on','leaving');card.classList.remove('is-opened');cclick.classList.remove('is-hidden');st=0;tree.classList.remove('party');tbusy=false;bub.classList.remove('on');burst.innerHTML='';}
 function start(){
@@ -525,9 +537,9 @@ var st=0,bTimer,si=0,ri=0,SM=['Ho ho ho!','Happy Birthday, Vo Thi S.Ny!','Merry 
 function bubble(txt,tx,ty,dir,dur){
 bt.textContent=txt;var w=bt.getComputedTextLength()+44,x,y,pts;
 br.setAttribute('x',-w/2);br.setAttribute('width',w);
-if(dir==='r'){x=Math.max(w/2+20,tx-100-w/2);y=ty;pts=(w/2-16)+',-10 '+(w/2+34)+',14 '+(w/2-16)+',18';}
-else if(dir==='d'){x=Math.min(Math.max(tx,w/2+16),1200-w/2-16);y=ty;pts='-14,24 0,52 14,24';}else{x=tx;y=ty+100;pts='-16,-22 6,-56 18,-22';}
-tail.setAttribute('points',pts);bub.setAttribute('transform','translate('+x+' '+y+')');
+if(dir==='r'){x=Math.max(w*k/2+20,tx-100-w*k/2);y=ty;pts=(w/2-16)+',-10 '+(w/2+34)+',14 '+(w/2-16)+',18';}
+else if(dir==='d'){x=Math.min(Math.max(tx,w*k/2+16),1200-w*k/2-16);y=ty-52*(k-1);pts='-14,24 0,52 14,24';}else{x=tx;y=ty+100;pts='-16,-22 6,-56 18,-22';}
+tail.setAttribute('points',pts);bub.setAttribute('transform','translate('+x+' '+y+') scale('+k+')');
 bub.classList.add('on');clearTimeout(bTimer);bTimer=setTimeout(function(){bub.classList.remove('on')},dur||2800);}
 function santaTap(){santa.classList.remove('hop');void santa.getBoundingClientRect();santa.classList.add('hop');var ty=st>=1?612:212;bubble(SM[si++%SM.length],480,ty,'r');sparkle(480,ty-7,12,80);}
 function rudTap(){rg.classList.remove('pulse');void rg.getBoundingClientRect();rg.classList.add('pulse');var ry=st>=1?529:129;bubble(RM[ri++%RM.length],940,ry,'u');sparkle(940,ry,14,80);}
@@ -621,10 +633,10 @@ function hbub(txt,x,y,dur){
 var o=document.createElementNS(ns,'g'),g=document.createElementNS(ns,'g'),pl=document.createElementNS(ns,'polygon'),r=document.createElementNS(ns,'rect'),t=document.createElementNS(ns,'text');
 t.setAttribute('text-anchor','middle');t.setAttribute('y','7');t.setAttribute('fill','#B7162A');t.setAttribute('font-family',"'Mountains of Christmas',Georgia,serif");t.setAttribute('font-size','22');t.setAttribute('font-weight','700');t.textContent=txt;
 g.appendChild(pl);g.appendChild(r);g.appendChild(t);o.appendChild(g);burst.appendChild(o);
-var w=t.getComputedTextLength()+34;x=Math.min(Math.max(x,w/2+10),1200-w/2-10);
+var w=t.getComputedTextLength()+34;x=Math.min(Math.max(x,w*k/2+10),1200-w*k/2-10);y=y-42*(k-1);
 r.setAttribute('x',-w/2);r.setAttribute('y',-20);r.setAttribute('width',w);r.setAttribute('height',40);r.setAttribute('rx',20);r.setAttribute('fill','#fff');r.setAttribute('stroke','#F2C14E');r.setAttribute('stroke-width','2.5');
 pl.setAttribute('points','-10,18 0,42 10,18');pl.setAttribute('fill','#fff');pl.setAttribute('stroke','#F2C14E');pl.setAttribute('stroke-width','2.5');
-o.setAttribute('transform','translate('+x+' '+y+')');
+o.setAttribute('transform','translate('+x+' '+y+') scale('+k+')');
 if(g.animate&&!reduce)g.animate([{opacity:0,transform:'scale(.3)'},{opacity:1,transform:'scale(1)',offset:.15},{opacity:1,transform:'scale(1)',offset:.85},{opacity:0,transform:'scale(.9)'}],{duration:dur,fill:'both'});
 at(dur+150,function(){if(o.parentNode)o.parentNode.removeChild(o);});
 }
@@ -696,6 +708,17 @@ cclick.classList.add('is-hidden');
 });
 $('dim').addEventListener('click',closeCard);
 window.addEventListener('resize',sizeCard);
+/* Fit the scene to the screen: portrait phones show the full width, landscape fills the screen */
+function fit(){
+var W=stg.clientWidth,H=stg.clientHeight,sky=$('sky');
+if(H>W){var vh=1200*H/W;vb0=800-vh;svgEl.setAttribute('viewBox','0 '+vb0+' 1200 '+vh);svgEl.setAttribute('preserveAspectRatio','xMidYMax meet');k=Math.min(2.4,Math.max(1,15/(28*W/1200)));}
+else{vb0=0;svgEl.setAttribute('viewBox','0 0 1200 800');svgEl.setAttribute('preserveAspectRatio','xMidYMax slice');k=Math.min(2.4,Math.max(1,15/(28*Math.max(W/1200,H/800))));}
+var h='';
+if(vb0<0){var n=Math.min(60,Math.round(-vb0/55));for(var i=0;i<n;i++){var x=Math.random()*1200,y=vb0+10+Math.random()*(-vb0-60);
+h+=i%4===0?'<use href="#s" x="'+x+'" y="'+y+'" class="tw"/>':'<circle cx="'+x+'" cy="'+y+'" r="'+(1.5+Math.random()*2.5)+'" class="tw"/>';}}
+sky.innerHTML=h;
+}
+window.addEventListener('resize',fit);window.addEventListener('orientationchange',fit);fit();
 $('replay').addEventListener('click',start);
 start();
 })();
