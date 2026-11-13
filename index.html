@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Birthday and Merry Christmas, Vo Thi S.Ny</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Mirza&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;overflow:hidden;background:#BE1E2D;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.stage{position:fixed;inset:0;overflow:hidden;background:#BE1E2D}
+@media (orientation:portrait){.stage{inset:auto;top:0;left:100vw;width:100vh;height:100vw;transform-origin:0 0;transform:rotate(90deg)}}
+.stage svg{display:block;width:100%;height:100%}
+.snow{position:absolute;inset:0;pointer-events:none}
+.snow i{position:absolute;top:-8px;border-radius:50%;background:#fff;opacity:0;animation:fall linear infinite}
+@keyframes fall{10%{opacity:.9}to{opacity:.9;transform:translate3d(var(--dx),110vh,0)}}
+.tw{animation:tw 3s ease-in-out infinite}.tw:nth-of-type(2n){animation-delay:1s}.tw:nth-of-type(3n){animation-delay:2s}
+@keyframes tw{50%{opacity:.15}}
+#moon{animation:dim 4s ease infinite}@keyframes dim{50%{opacity:.93}}
+#team.go{animation:land 3.4s cubic-bezier(.2,.7,.2,1) both}
+@keyframes land{0%{transform:translate(-900px,-620px) rotate(-6deg);opacity:0}12%{opacity:1}70%{transform:translate(0,14px) rotate(1deg)}85%{transform:translate(0,-6px)}100%{transform:translate(0,0)}}
+#trail.go{animation:trail 3.4s ease-out both}
+@keyframes trail{0%{opacity:0}30%{opacity:.9}100%{opacity:.3}}
+#sit{transition:opacity .25s}#sit.out{opacity:0}
+#santa2{opacity:0;transform:translate(410px,612px) scale(1.7)}
+#santa2.walk{animation:step 2.4s ease-in-out both}
+@keyframes step{0%{opacity:1;transform:translate(410px,612px) scale(1.7)}25%{opacity:1;transform:translate(452px,560px) scale(1.7)}45%{opacity:1;transform:translate(500px,690px) scale(1.7)}100%{opacity:1;transform:translate(850px,700px) scale(1.7)}}
+#santa2.done{opacity:1;transform:translate(850px,700px) scale(1.7)}
+#carry.put{opacity:0}
+#sw{opacity:0;transform-origin:12px -38px}
+#santa2.done #sw{opacity:1;animation:wave 1.4s ease-in-out infinite}
+@keyframes wave{50%{transform:rotate(-22deg)}}
+#gift{opacity:0;pointer-events:none;cursor:pointer}
+#gift{transform-box:fill-box;transform-origin:center}#gift.shown{opacity:1;pointer-events:auto;animation:drop 1.6s cubic-bezier(.45,.05,.6,1) both}#sleigh{opacity:0}#sleigh.go{animation:arrive 4.4s cubic-bezier(.15,.55,.3,1) .6s forwards,bob 3.6s ease-in-out 5.2s infinite}#sleigh.leave{animation:leave 3.2s ease-in forwards}
+@keyframes drop{0%{opacity:0;transform:translate(-440px,-410px) rotate(-25deg)}8%{opacity:1}78%{opacity:1;transform:translate(0,6px) rotate(0)}88%{opacity:1;transform:translate(0,-14px)}100%{opacity:1;transform:translate(0,0)}}@keyframes arrive{0%{opacity:0;transform:translate(-1500px,600px)}10%{opacity:1}100%{opacity:1;transform:translate(0,0)}}@keyframes bob{0%,100%{transform:translate(0,0)}50%{transform:translate(0,8px)}}@keyframes leave{from{opacity:1;transform:translate(0,400px)}to{opacity:0;transform:translate(2000px,-300px)}}#bulbs{opacity:0;animation:lon 1.2s ease 2.4s forwards}@keyframes lon{to{opacity:1}}#tstar{transform-box:fill-box;transform-origin:center;animation:ts 2.4s ease-in-out infinite}@keyframes ts{50%{transform:scale(1.15)}}#santa,#rudolph{cursor:pointer;outline:none}#santa{transform-box:fill-box;transform-origin:50% 100%}#santa.hop{animation:hop .6s ease-out}@keyframes hop{30%{transform:translateY(-22px) rotate(-4deg)}60%{transform:translateY(0) rotate(3deg)}100%{transform:none}}#santa:focus-visible,#rudolph:focus-visible{outline:3px dashed #F2E69E;outline-offset:6px}#rglow{transform-box:fill-box;transform-origin:center}#rglow.pulse{animation:rp .9s ease-out}@keyframes rp{40%{transform:scale(4.5);opacity:.75}}#tilt{transition:transform .5s ease-out}#bubble{opacity:0;transition:opacity .25s;pointer-events:none}#bubble.on{opacity:1}@media (prefers-reduced-motion:reduce){.snow{display:none}#santa.hop,#rglow.pulse{animation:none}#bulbs{opacity:1;animation:none}.b,#tstar{animation:none}.tw,#moon{animation:none}#sleigh.go{animation:none;opacity:1}#sleigh.leave{animation:none;opacity:0}#gift.shown{animation:none}#lid,#greet{transition:none}}
+
+/* ---- Added: gift opening, greeting card, Santa's mouth, replay button ---- */
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.rp{position:fixed;right:14px;bottom:14px;z-index:5;width:44px;height:44px;border-radius:50%;border:2px solid #F2C14E;background:rgba(190,30,45,.85);color:#fff;display:grid;place-items:center;cursor:pointer}
+.rp:focus-visible{outline:3px dashed #F2E69E;outline-offset:3px}
+.b{animation:bt 1.8s ease-in-out infinite}@keyframes bt{50%{opacity:.35}}
+/* gift lid pops open */
+#lid{transform-box:fill-box;transform-origin:left bottom;transition:transform .9s cubic-bezier(.3,1.4,.5,1),opacity .6s .5s}
+#gift.open #lid{transform:translate(-30px,-70px) rotate(-35deg);opacity:0}
+#glow{opacity:0;transition:opacity .4s}
+#gift.open #glow{opacity:1}
+#ring{transition:opacity .3s}
+#gift.open #ring{opacity:0}
+#gift.open{cursor:default}
+/* greeting card appears after the gift opens */
+#greet{opacity:0;pointer-events:none;transform-box:fill-box;transform-origin:center;transform:scale(.8);transition:opacity .6s,transform .7s cubic-bezier(.3,1.4,.5,1)}
+#greet.show{opacity:1;transform:scale(1)}
+/* Santa's mouth moves while he speaks */
+#mouth{transform-box:fill-box;transform-origin:center}
+#santa.talk #mouth{animation:mt .28s ease-in-out infinite}
+@keyframes mt{50%{transform:scaleY(3.2)}}
+/* greeting card: magic blink, then it shrinks and flies onto the Christmas tree */
+#greet.vanish{animation:gvan 2s ease-in forwards}
+@keyframes gvan{0%{opacity:1;transform:scale(1)}8%{opacity:.1}16%{opacity:1}24%{opacity:.1}32%{opacity:1}40%{opacity:.15}48%{opacity:1;transform:scale(1.04)}58%{opacity:1;transform:scale(1)}100%{opacity:0;transform:translate(-395px,410px) scale(.12)}}
+/* small card on the tree, sized to fit the tree, blinking */
+#tcard{opacity:0;pointer-events:none;transform-box:fill-box;transform-origin:center}
+#tcard.show{animation:tpop .7s cubic-bezier(.3,1.5,.5,1) both,tblink 1.3s ease-in-out .7s infinite}
+@keyframes tpop{0%{opacity:0;transform:scale(.2)}100%{opacity:1;transform:scale(1)}}
+@keyframes tblink{0%,100%{opacity:1}50%{opacity:.3}}
+@media (prefers-reduced-motion:reduce){.b{animation:none}#lid,#greet{transition:none}#santa.talk #mouth{animation:none}#greet.vanish{animation:none}#tcard.show{animation:none;opacity:1}}
+
+/* sleigh lands, Santa steps out with the gift box and wishes */
+#sleigh.landed{animation:land 1.6s cubic-bezier(.4,0,.3,1) both}
+@keyframes land{0%{opacity:1;transform:translate(0,0)}60%{opacity:1;transform:translate(0,410px)}80%{opacity:1;transform:translate(0,396px)}100%{opacity:1;transform:translate(0,400px)}}
+#santa,#sgift{transition:opacity .25s}#santa.gone,#sgift.gone{opacity:0;pointer-events:none}
+#walker{opacity:0;pointer-events:none;cursor:pointer;outline:none;transform:translate(480px,690px) scale(1.3)}
+#walker:focus-visible{outline:3px dashed #F2E69E;outline-offset:6px}
+#walker.walk{opacity:1;pointer-events:auto;animation:wout 1.8s ease-in-out both}
+#walker.back{opacity:1;animation:wback 1.5s ease-in-out both}
+@keyframes wout{0%{opacity:0;transform:translate(480px,690px) scale(1.3)}12%{opacity:1}30%{transform:translate(500px,682px) scale(1.3)}100%{opacity:1;transform:translate(340px,770px) scale(1.6)}}
+@keyframes wback{0%{opacity:1;transform:translate(340px,770px) scale(1.6)}85%{opacity:1;transform:translate(500px,682px) scale(1.3)}100%{opacity:0;transform:translate(480px,690px) scale(1.3)}}
+#wbody{transform-box:fill-box;transform-origin:50% 100%}
+#walker.walk #wbody{animation:wb .3s ease-in-out 6}
+#walker.back #wbody{animation:wb .3s ease-in-out 5}
+@keyframes wb{50%{transform:translateY(-3px) rotate(2deg)}}
+#wmouth{transform-box:fill-box;transform-origin:center}
+#walker.talk #wmouth{animation:mt .28s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){#sleigh.landed{animation:none;opacity:1;transform:translate(0,400px)}#walker.walk{animation:none;opacity:1;transform:translate(340px,770px) scale(1.6)}#walker.back{animation:none;opacity:0}#walker.walk #wbody,#walker.back #wbody,#walker.talk #wmouth{animation:none}}
+
+/* gift box handed over and left on the snow */
+#wbox{transition:opacity .2s}#walker.gave #wbox{opacity:0}
+#dbox{opacity:0;pointer-events:none;transform:translate(398px,772px) scale(1.6)}
+#dbox.show{opacity:1;animation:dropin .8s cubic-bezier(.3,0,.5,1) both}
+@keyframes dropin{0%{opacity:1;transform:translate(345px,730px) scale(1.6)}60%{transform:translate(398px,775px) scale(1.6)}78%{transform:translate(398px,764px) scale(1.6)}100%{transform:translate(398px,772px) scale(1.6)}}
+@media (prefers-reduced-motion:reduce){#dbox.show{animation:none;opacity:1}}
+
+/* ---- Gift box on the snow is tappable ---- */
+#dbox.ready{pointer-events:auto;cursor:pointer;outline:none}
+#dbox.show.ready{animation:bobbox 1.2s ease-in-out infinite}
+@keyframes bobbox{0%,100%{opacity:1;transform:translate(398px,772px) scale(1.6)}50%{opacity:1;transform:translate(398px,762px) scale(1.6)}}
+#dbox.show.ready.open{animation:none;opacity:1;transform:translate(398px,772px) scale(1.6)}
+#dbox:focus-visible{outline:3px dashed #F2E69E;outline-offset:6px}
+#dglow{opacity:0}#dbox.ready #dglow{opacity:.55;animation:gl 1.2s ease-in-out infinite}#dbox.open #dglow{animation:none;opacity:.8}
+@keyframes gl{50%{opacity:.15}}
+#dlid{transform-box:fill-box;transform-origin:left bottom;transition:transform .6s cubic-bezier(.3,1.5,.5,1)}
+#dbox.open #dlid{transform:translate(-10px,-28px) rotate(-42deg)}
+
+/* ---- Letter card (opens when the gift is opened) ---- */
+.cardwrap{position:absolute;inset:0;z-index:20;display:none;--cw:350px;--ch:500px}
+.cardwrap.on{display:block}
+.cardwrap .dim{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(60,0,10,.45),rgba(20,0,5,.82));animation:dimin .6s ease both}
+@keyframes dimin{from{opacity:0}to{opacity:1}}
+.card{perspective:1500px;position:absolute;left:calc(50% - var(--cw)/2);top:calc(50% - var(--ch)/2);width:var(--cw);height:var(--ch);transition:transform 1s cubic-bezier(.68,-.55,.27,1.55);transform:rotate(-10deg) translate(0,0);animation:cardIn 1s cubic-bezier(.87,-.41,.19,1.44)}
+.card:before{content:"";display:block;position:absolute;left:0;top:0;width:100%;height:100%;box-shadow:0 0 50px #000}
+.card.is-opened{transform:rotate(0deg) translate(calc(var(--cw)/2),0)}
+.card.is-opened .cart-page-front{transform:rotateY(-180deg)}
+@keyframes cardIn{0%{opacity:0;transform:rotate(-10deg) translate(0,55%) scale(.2)}25%{opacity:1}100%{opacity:1;transform:rotate(-10deg) translate(0,0) scale(1)}}
+.card-page{width:var(--cw);height:var(--ch);transition:transform 1s ease-in-out;cursor:pointer;position:absolute;outline:1px solid transparent}
+.cart-page-front{transform-origin:0 50% 0;transform-style:preserve-3d;transform:rotateY(-20deg);z-index:2}
+.cart-page-outside,.cart-page-inside{position:absolute;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.cart-page-outside{border:calc(var(--ch)*.02) solid #fbfbfb;background:radial-gradient(circle at 50% 36%,rgba(255,255,255,.26),transparent 55%),radial-gradient(ellipse at 50% 125%,rgba(70,0,10,.6),transparent 60%),radial-gradient(rgba(255,255,255,.26) 1.4px,transparent 2px) 0 0/22px 22px,linear-gradient(160deg,#dc3530 0%,#c72320 48%,#a31a1d 100%);width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-family:'Mountains of Christmas',Georgia,serif;font-weight:700;text-align:center;overflow:hidden}
+/* gold foil frame */
+.cart-page-outside:before{content:"";position:absolute;inset:calc(var(--ch)*.028);border:2px solid #F2C14E;border-radius:8px;box-shadow:inset 0 0 0 calc(var(--ch)*.008) rgba(199,35,32,.95),inset 0 0 0 calc(var(--ch)*.011) rgba(242,193,78,.7),0 0 14px rgba(242,193,78,.35);pointer-events:none}
+/* moving light shine */
+.cart-page-outside:after{content:"";position:absolute;top:-25%;left:-70%;width:38%;height:150%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.38),transparent);transform:rotate(12deg);animation:cvshine 4s ease-in-out infinite;pointer-events:none}
+@keyframes cvshine{0%{left:-70%}55%,100%{left:140%}}
+.cart-page-outside>*{position:relative;z-index:1}
+.cvstar{width:calc(var(--ch)*.22);height:calc(var(--ch)*.22);margin-bottom:calc(var(--ch)*.02);filter:drop-shadow(0 0 8px rgba(255,236,150,.9)) drop-shadow(0 2px 3px rgba(80,0,10,.5));animation:cvglow 2.4s ease-in-out infinite}
+@keyframes cvglow{50%{transform:scale(1.12) rotate(6deg);filter:drop-shadow(0 0 16px rgba(255,244,180,1)) drop-shadow(0 2px 3px rgba(80,0,10,.5))}}
+.cv-for{font-size:calc(var(--ch)*.065);color:#ffe9b0;letter-spacing:.12em;text-transform:uppercase;text-shadow:0 2px 3px rgba(80,0,10,.5)}
+.cv-name{font-size:calc(var(--ch)*.105);line-height:1.1;margin-top:calc(var(--ch)*.01);background:linear-gradient(180deg,#fffbe0 0%,#F7D774 45%,#d79a2b 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 2px rgba(80,0,10,.55))}
+.cvdiv{width:62%;height:auto;margin:calc(var(--ch)*.025) 0 calc(var(--ch)*.015)}
+.cv-sub{font-size:calc(var(--ch)*.042);color:#fff;text-shadow:0 2px 3px rgba(80,0,10,.5);line-height:1.2;padding:0 8%}
+.cvflake{position:absolute !important;color:rgba(255,255,255,.85);font-size:calc(var(--ch)*.055);font-style:normal;animation:cvtw 3s ease-in-out infinite}
+.cvflake:nth-of-type(2){animation-delay:.8s}.cvflake:nth-of-type(3){animation-delay:1.6s}.cvflake:nth-of-type(4){animation-delay:2.2s}
+@keyframes cvtw{50%{opacity:.25;transform:scale(.8) rotate(25deg)}}
+@media (prefers-reduced-motion:reduce){.cart-page-outside:after,.cvstar,.cvflake{animation:none}}
+
+/* ---- Gift vanishes in a puff of magic after it is opened ---- */
+#dbox.show.ready.open.poof{animation:dpoof 1s cubic-bezier(.4,0,.6,1) forwards;pointer-events:none}
+@keyframes dpoof{0%{opacity:1;transform:translate(398px,772px) scale(1.6)}30%{opacity:1;transform:translate(398px,742px) scale(2.1) rotate(-6deg)}100%{opacity:0;transform:translate(398px,640px) scale(.15) rotate(24deg)}}
+@media (prefers-reduced-motion:reduce){#dbox.show.ready.open.poof{animation:none;opacity:0}}
+.cart-page-inside,.cart-page-bottom{background-color:#d4d1d0;background-image:radial-gradient(rgba(255,255,255,.45) 1.5px,transparent 2px);background-size:18px 18px;border:calc(var(--ch)*.04) solid #d4d1d0;display:flex;justify-content:center;align-items:center;text-align:center}
+.cart-page-inside{transform:rotateY(-180deg);border-right:none !important}
+.cart-page-bottom{z-index:1;border-left:none !important;flex-direction:column}
+.merry-christmas{transform:rotate(-20deg);display:block}
+.merry-christmas svg{width:var(--cw);height:auto;display:block}
+.cart-page-bottom p{margin:0;padding:0 calc(var(--ch)*.015);line-height:1.2;font-family:'Mirza',Georgia,serif}
+.cart-page-bottom .wh{font-family:'Mountains of Christmas',Georgia,serif;font-weight:700;font-size:calc(var(--ch)*.068);color:#c72320}
+.cart-page-bottom .wb{font-size:calc(var(--ch)*.04);margin:.3em 0 .8em;color:#2a2a2a}
+.cart-page-bottom .wf{font-family:'Mountains of Christmas',Georgia,serif;font-weight:700;font-size:calc(var(--ch)*.05);color:#c72320;margin-top:.2em}
+.click-icon{position:absolute;left:50%;bottom:20px;transform:translate(-50%,0);animation:iconAnimation 1s infinite alternate ease-in-out;transition:opacity .5s ease-in-out;opacity:1;pointer-events:none}
+.click-icon svg{display:block;width:clamp(40px,calc(var(--ch)*.15),80px);height:clamp(40px,calc(var(--ch)*.15),80px)}
+.click-icon.is-hidden{opacity:0}
+@keyframes iconAnimation{0%{transform:translate(-50%,0)}100%{transform:translate(-50%,10px)}}
+@media (prefers-reduced-motion:reduce){.card{animation:none}.card,.card-page{transition:none}#dbox.show.ready,#dglow,#dbox.ready #dglow{animation:none}#dlid{transition:none}.click-icon{animation:none}.cardwrap .dim{animation:none}}
+
+/* ---- Card goes away after it is closed ---- */
+.cardwrap.leaving{pointer-events:none}
+.cardwrap.leaving .card{animation:cardOut .9s ease-in forwards}
+.cardwrap.leaving .dim{animation:dimout .9s ease forwards}
+@keyframes cardOut{to{opacity:0;transform:rotate(10deg) translate(0,-70%) scale(.15)}}
+@keyframes dimout{to{opacity:0}}
+@media (prefers-reduced-motion:reduce){.cardwrap.leaving .card,.cardwrap.leaving .dim{animation:none;opacity:0}}
+/* ---- Magic bauble on the Christmas tree: tap for a surprise ---- */
+#tsur{cursor:pointer;outline:none}
+#tsur:focus-visible{outline:3px dashed #F2E69E;outline-offset:4px}
+#tring{transform-box:fill-box;transform-origin:center;animation:trg 1.6s ease-out infinite}
+@keyframes trg{0%{transform:scale(.8);opacity:.9}100%{transform:scale(2.6);opacity:0}}
+#tbub{transform-box:fill-box;transform-origin:center;animation:tbp 1.6s ease-in-out infinite}
+@keyframes tbp{50%{transform:scale(1.15)}}
+#tglow{opacity:0;pointer-events:none}
+#tree.party #tglow{animation:tgl 1.2s ease-in-out 3}
+@keyframes tgl{50%{opacity:.55}}
+#tree.party #bulbs{opacity:1;animation:hue .9s linear infinite}
+@keyframes hue{to{filter:hue-rotate(360deg)}}
+#tree.party .b{animation-duration:.3s}
+@media (prefers-reduced-motion:reduce){#tring,#tbub,#tree.party #tglow,#tree.party #bulbs{animation:none}}
+/* ---- Finale: village lights, birthday cake, cutting the cake ---- */
+#wcake{display:none}
+#walker.cakemode #wbox{display:none}
+#walker.cakemode #wcake{display:inline}
+#walker.gave #wcake{display:none}
+.flame{transform-box:fill-box;transform-origin:50% 100%;animation:flk .25s ease-in-out infinite alternate}
+@keyframes flk{to{transform:scale(.8,1.2)}}
+#cake{opacity:0;pointer-events:none;transform:translate(398px,772px) scale(2)}
+#cake.show{opacity:1;animation:cakein .8s cubic-bezier(.3,0,.5,1) both}
+@keyframes cakein{0%{opacity:1;transform:translate(345px,730px) scale(1.6)}60%{transform:translate(398px,780px) scale(2)}78%{transform:translate(398px,766px) scale(2)}100%{transform:translate(398px,772px) scale(2)}}
+#cake.ready{pointer-events:auto;cursor:pointer;outline:none}
+#cake.show.ready{animation:bobcake 1.3s ease-in-out infinite}
+@keyframes bobcake{0%,100%{opacity:1;transform:translate(398px,772px) scale(2)}50%{opacity:1;transform:translate(398px,764px) scale(2)}}
+#cake.show.ready.cut{animation:none;opacity:1;transform:translate(398px,772px) scale(2);pointer-events:none;cursor:default}
+#cake:focus-visible{outline:3px dashed #F2E69E;outline-offset:6px}
+#cglow{opacity:0}#cake.ready #cglow{opacity:.55;animation:gl 1.2s ease-in-out infinite}#cake.cut #cglow{animation:none;opacity:.8}
+#cake.out .flame{opacity:0;transition:opacity .4s}
+#cgap,#cslice,#cknife{opacity:0}
+#cake.cut #cknife{animation:knife 1.2s ease-in-out forwards}
+@keyframes knife{0%{opacity:0;transform:translate(0,-40px)}15%{opacity:1}55%{opacity:1;transform:translate(0,0)}75%{opacity:1;transform:translate(0,0)}100%{opacity:0;transform:translate(0,-8px)}}
+#cake.cut #cgap{animation:gapin 0s .75s forwards}
+@keyframes gapin{to{opacity:1}}
+#cake.cut #cslice{animation:sliceout 1.4s ease-in-out .75s forwards}
+@keyframes sliceout{0%{opacity:1;transform:translate(0,0)}100%{opacity:1;transform:translate(36px,6px) rotate(8deg)}}
+@media (prefers-reduced-motion:reduce){.flame{animation:none}#cake.show,#cake.show.ready{animation:none;opacity:1}#cglow,#cake.ready #cglow{animation:none}#cake.cut #cknife{animation:none}#cake.cut #cgap{animation:none;opacity:1}#cake.cut #cslice{animation:none;opacity:1;transform:translate(36px,6px)}}
+/* ---- Second gift from Santa ---- */
+#g2{opacity:0;pointer-events:none;transform:translate(490px,772px) scale(1.6)}
+#g2.show{opacity:1;animation:g2in .8s cubic-bezier(.3,0,.5,1) both}
+@keyframes g2in{0%{opacity:1;transform:translate(345px,730px) scale(1.6)}60%{transform:translate(490px,775px) scale(1.6)}78%{transform:translate(490px,764px) scale(1.6)}100%{transform:translate(490px,772px) scale(1.6)}}
+#g2.ready{pointer-events:auto;cursor:pointer;outline:none}
+#g2.show.ready{animation:g2bob 1.2s ease-in-out infinite}
+@keyframes g2bob{0%,100%{opacity:1;transform:translate(490px,772px) scale(1.6)}50%{opacity:1;transform:translate(490px,762px) scale(1.6)}}
+#g2.show.ready.open{animation:none;opacity:1;transform:translate(490px,772px) scale(1.6);cursor:default}
+#g2:focus-visible{outline:3px dashed #F2E69E;outline-offset:6px}
+#g2glow{opacity:0}#g2.ready #g2glow{opacity:.55;animation:gl 1.2s ease-in-out infinite}#g2.open #g2glow{animation:none;opacity:.8}
+#g2lid{transform-box:fill-box;transform-origin:left bottom;transition:transform .6s cubic-bezier(.3,1.5,.5,1)}
+#g2.open #g2lid{transform:translate(-10px,-28px) rotate(-42deg)}
+@media (prefers-reduced-motion:reduce){#g2.show,#g2.show.ready{animation:none;opacity:1}#g2glow,#g2.ready #g2glow{animation:none}#g2lid{transition:none}}
+</style>
+</head>
+<body>
+<div class="stage">
+<svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMax slice" role="group" aria-label="Santa’s sleigh over a snowy village. Tap Santa and Rudolph.">
+
+<desc id="d">Santa lands his reindeer sleigh in a snowy red-and-white Christmas village, and Santa wishes everyone a Happy Birthday and Merry Christmas.</desc>
+<defs><filter id="bl" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="3.5"/></filter>
+<g id="h"><rect x="-30" y="-34" width="60" height="34"/><polygon points="-38,-34 0,-64 38,-34"/><rect x="14" y="-62" width="9" height="18"/><rect x="-21" y="-24" width="13" height="13" fill="#BE1E2D"/><rect x="8" y="-24" width="13" height="13" fill="#BE1E2D"/><path d="M-14.5 -24V-11M-21 -17.5H-8M14.5 -24V-11M8 -17.5H21" stroke="#fff" stroke-width="1"/></g>
+<g id="t"><polygon points="-24,0 0,-50 24,0"/><polygon points="-18,-30 0,-78 18,-30"/><rect x="-3" y="0" width="6" height="9"/></g>
+<g id="s"><polygon points="0,-12 2,-3 10,0 2,3 0,12 -2,3 -10,0 -2,-3"/></g>
+<g id="hl"><rect x="-30" y="-34" width="60" height="34"/><polygon points="-38,-34 0,-64 38,-34" fill="#F7C873"/><rect x="14" y="-62" width="9" height="18"/><rect x="-21" y="-24" width="13" height="13" fill="#FFC93C" stroke="#E08A00" stroke-width="1"/><rect x="8" y="-24" width="13" height="13" fill="#FFC93C" stroke="#E08A00" stroke-width="1"/><path d="M-14.5 -24V-11M-21 -17.5H-8M14.5 -24V-11M8 -17.5H21" stroke="#E08A00" stroke-width="1"/><rect x="-5" y="-16" width="10" height="16" fill="#C41C30"/></g>
+<path id="cl" d="M431.7,307c0,0,7.6-26.7,33.2-21.7c22.4,4.4,13.7,27.5,13.7,27.5s4.8-0.3,4.5,9.8c0,0,5.2-3.2,13,0c7.8,3.2,6.8,15.3,6.8,15.3s8.4-3.6,9.3,4.2c0,0,1.7-1,3.2,1c0.7-0.5,2.8-2.4,8.1-0.6c6.7,2.3,6.9,3.3,11.5,2.2s8.7,1.3,11.8,0.8s8.2,0.6,14.2,0.3s21.2,1.9,21.2,1.9H295l68.9-6.8c0,0,0.3-4.4,4.9-7.1s10.8,0.5,10.8,0.5s-0.6-7.6,5.8-10.9s12.5-0.9,12.5-0.9s0.8-6.6,9.8-4.6c0,0,0.1-7.1,9.5-11.1S431.7,307,431.7,307z"/>
+<g id="deer"><ellipse rx="42" ry="19"/><path d="M30 -8L52 -38L62 -32L42 4Z"/><ellipse cx="62" cy="-38" rx="15" ry="8" transform="rotate(20 62 -38)"/><path d="M56 -44L52 -68M54 -55L43 -61M62 -45L68 -68M65 -56L76 -60M-42 -4L-52 -12" stroke="#231F20" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M-28 12L-34 52M-18 14L-20 54M20 14L26 52M30 12L40 50" stroke="#231F20" stroke-width="6" fill="none" stroke-linecap="round"/></g>
+</defs>
+<rect width="1200" height="800" fill="#BE1E2D"/>
+<path fill="#C41C30" d="M938.6,0c0,0,87.4,112.9,82.2,245.9c-3,77.8-35,186.9-165.7,277S475.6,599.8,430.2,596c-45.4-3.7-168-124.5-179.1-143c-11.1-18.5-61.6-74.1-71.3-103C117,161.9,199.9,0,199.9,0H938.6z"/>
+<path fill="#CC172D" d="M873.8,0.1c3.3,0,70.8,90.3,63.3,190.4c-7.5,100.1-75.6,197.4-91.8,226c-16.2,28.6-111.7,105.8-177.2,122.7c-65.5,16.9-259.1-70.3-310.8-110.7c-51.7-40.4-109.5-166.3-118.1-241.3S290.9,0.1,290.9,0.1H873.8z"/>
+<path fill="#D31132" d="M835.9,81.9c0,0,16.3,98.4,7.2,161.8c-9.1,63.3-137.3,194.8-210.5,195.8c-73.1,1-301.1-103.2-312.4-190.6s41.7-180,61.2-208.2S444.9,0,444.9,0H771C771,0,829.9,35.2,835.9,81.9z"/>
+<path fill="#DD0A2D" d="M647,6.3c0,0,113.8,7.3,143.9,129.6c30.1,122.3-42.7,195.3-133.4,240.9c-90.8,45.6-255-71.2-272-152.7C368.4,142.5,424.3-14.4,647,6.3z"/>
+<path fill="#EF003F" d="M633.2,40.6c7,0.8,88.8,35.1,107.5,71.2c18.7,36.1,12.7,108.7,0,145.7c-12.7,37-73.1,88.8-112.5,91.7c-39.5,2.9-170-47.4-187-80.9c-16.9-33.5-7.3-106.8,9.9-141.4C468.3,92.4,518.5,27.5,633.2,40.6z"/>
+<g fill="#B7162A"><path d="M1092,0c0,0,69.8,37.6,83.9,58.6S1200,142,1200,142V0H1092z"/><path d="M1200,407.2c0,0-23.1,131.2-84.5,173.5c-61.4,42.2-52.6,57.9-52.6,57.9l137.2-20V407.2z"/><path d="M115,0c0,0-48.8,30-63.9,48.7C36,67.3,0,152.5,0,152.5V0H115z"/><path d="M0,487.8c0,0,25.3,88.7,68.7,111.7c43.4,23,58.3,40.5,61.8,41.3C134,641.5,0,641.2,0,641.2V487.8z"/></g>
+<g id="moon"><circle cx="600.8" cy="191.3" r="132" fill="#FFFAD7"/><g fill="#F2E69E"><circle cx="555" cy="150" r="19"/><circle cx="652" cy="236" r="27"/><circle cx="622" cy="148" r="9"/><circle cx="548" cy="236" r="12"/><circle cx="670" cy="160" r="7"/></g></g>
+<g fill="#fff"><use href="#s" x="875" y="250" class="tw"/><use href="#s" x="245" y="240" class="tw"/><use href="#s" x="70" y="55" class="tw"/><use href="#s" x="1087" y="152" class="tw"/><use href="#s" x="954" y="30" class="tw"/><use href="#s" x="326" y="90" class="tw"/><circle cx="268" cy="56" r="2"/><circle cx="380" cy="86" r="2"/><circle cx="478" cy="97" r="2"/><circle cx="373" cy="188" r="3"/><circle cx="792" cy="245" r="3"/><circle cx="892" cy="38" r="2.5"/><circle cx="949" cy="85" r="2.5"/><circle cx="1138" cy="243" r="1.5"/><circle cx="162" cy="400" r="1.5"/><circle cx="58" cy="160" r="3"/><circle cx="1098" cy="328" r="2"/><circle cx="624" cy="29" r="2.3"/></g>
+<use href="#cl" fill="#fff"/><use href="#cl" fill="#fff" transform="translate(560 -10) scale(.8)"/>
+<g fill="#fff" opacity=".4"><use href="#h" x="160" y="575"/><use href="#h" x="400" y="570"/><use href="#h" x="720" y="575"/><use href="#h" x="1010" y="570"/><use href="#t" x="270" y="578"/><use href="#t" x="570" y="575"/><use href="#t" x="870" y="578"/><use href="#t" x="1110" y="575"/></g>
+<g fill="#fff"><use href="#h" x="70" y="598"/><use href="#h" x="240" y="600"/><use href="#h" x="1070" y="596"/><use href="#t" x="150" y="602"/><use href="#t" x="340" y="604"/><use href="#t" x="990" y="600"/><use href="#t" x="1160" y="602"/><use href="#t" x="30" y="604"/></g>
+<path d="M1200,557.6c0,0-422.7-2-740.9,53.6c0,0-218.6-44.7-459.1-40.7V800h1200V557.6z" fill="#fff"/>
+<g id="hlights"></g>
+<g id="tree" transform="translate(205 700)">
+<ellipse cx="0" cy="2" rx="125" ry="16" fill="#F2E69E" opacity=".35"/>
+<circle cx="0" cy="-110" r="135" fill="#F2E69E" opacity=".14"/>
+<rect x="-10" y="-26" width="20" height="28" rx="3" fill="#7a4a32"/>
+<g stroke-linejoin="round" stroke-width="14">
+<polygon points="-72,-24 0,-106 72,-24" fill="#1f8f4e" stroke="#1f8f4e"/>
+<polygon points="-56,-88 0,-162 56,-88" fill="#2aa860" stroke="#2aa860"/>
+<polygon points="-40,-144 0,-208 40,-144" fill="#35b872" stroke="#35b872"/></g>
+<g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"><path d="M-78 -22Q-52 -8 -26 -22Q0 -8 26 -22Q52 -8 78 -22"/><path d="M-62 -86Q-31 -72 0 -86Q31 -72 62 -86"/><path d="M-46 -142Q-23 -130 0 -142Q23 -130 46 -142"/></g>
+<circle cx="-14" cy="-58" r="3.6" fill="#231F20"/><circle cx="14" cy="-58" r="3.6" fill="#231F20"/><circle cx="-14" cy="-59" r="1.1" fill="#fff"/><circle cx="14" cy="-59" r="1.1" fill="#fff"/>
+<path d="M-8 -50Q0 -42 8 -50" fill="none" stroke="#231F20" stroke-width="2.4" stroke-linecap="round"/><circle cx="-26" cy="-50" r="5.5" fill="#ff9aa8" opacity=".75"/><circle cx="26" cy="-50" r="5.5" fill="#ff9aa8" opacity=".75"/>
+<g id="bulbs"><g id="halo" filter="url(#bl)"></g><g id="core"></g></g>
+<circle id="tglow" cy="-110" r="150" fill="#fff6b0"/>
+<g id="tsur" tabindex="0" role="button" aria-label="Magic bauble on the Christmas tree. Tap for a surprise."><circle id="tring" cx="24" cy="-116" r="10" fill="none" stroke="#FFFAD7" stroke-width="2"/><path d="M24 -128V-123" stroke="#F2C14E" stroke-width="1.5"/><g id="tbub"><circle cx="24" cy="-116" r="7.5" fill="#F2C14E"/><circle cx="21.5" cy="-118.5" r="2.2" fill="#fff" opacity=".85"/><use href="#s" transform="translate(24 -116) scale(.45)" fill="#BE1E2D"/></g><circle cx="24" cy="-116" r="20" fill="transparent"/></g>
+<g id="tstar"><circle cy="-228" r="28" fill="#FFFAD7" opacity=".5" filter="url(#bl)"/><g transform="translate(0 -228) scale(1.9)"><use href="#s" fill="#F2C14E"/></g></g>
+<rect x="-108" y="-24" width="30" height="26" rx="3" fill="#EF003F"/><rect x="-96" y="-24" width="6" height="26" fill="#fff"/><rect x="82" y="-18" width="26" height="20" rx="3" fill="#1A4D89"/><rect x="92" y="-18" width="6" height="20" fill="#F2C14E"/>
+</g>
+<g id="sleigh"><g id="tilt">
+<path d="M530 238L620 214L740 194L860 174" stroke="#231F20" stroke-width="3" fill="none"/>
+<g transform="translate(640 218) rotate(-10)"><use href="#deer" fill="#231F20"/></g>
+<g transform="translate(755 198) rotate(-10)"><use href="#deer" fill="#231F20"/></g>
+<g transform="translate(870 178) rotate(-10)"><use href="#deer" fill="#231F20"/><g id="rudolph" tabindex="0" role="button" aria-label="Rudolph. Tap his nose."><circle id="rglow" cx="77" cy="-36" r="13" fill="#EF003F" opacity=".3"/><circle cx="77" cy="-36" r="5.5" fill="#EF003F"/><circle cx="77" cy="-36" r="30" fill="transparent"/></g></g>
+<ellipse cx="440" cy="232" rx="26" ry="28" fill="#231F20"/><rect x="428" y="196" width="14" height="14" fill="#F2C14E"/><rect x="446" y="200" width="14" height="14" fill="#EF003F"/>
+<path d="M404 292H520Q550 292 544 262M404 292Q394 289 396 272M440 268V292M510 268V292" stroke="#231F20" stroke-width="7" fill="none" stroke-linecap="round"/>
+<path d="M416 240H530Q536 268 508 274H444Q412 268 416 240Z" fill="#231F20"/><path d="M420 252H526" stroke="#F2E69E" stroke-width="4"/>
+<g id="santa" tabindex="0" role="button" aria-label="Santa. Tap to say hello."><g transform="translate(480 272) scale(1.3)"><rect x="-40" y="-100" width="100" height="110" fill="transparent"/><ellipse cx="0" cy="-24" rx="22" ry="18" fill="#DD0A2D"/><rect x="-20" y="-26" width="40" height="5" fill="#231F20"/><rect x="-6" y="-27" width="12" height="7" fill="#F2C14E"/><path d="M18 -30L36 -52" stroke="#DD0A2D" stroke-width="7" stroke-linecap="round"/><circle cx="37" cy="-54" r="5" fill="#fff"/><circle cx="0" cy="-46" r="10" fill="#f4c7a1"/><ellipse cx="0" cy="-36" rx="11" ry="9" fill="#fff"/><ellipse id="mouth" cx="0" cy="-39" rx="3" ry="1.1" fill="#8b1a2b"/><circle cx="-4" cy="-47" r="1.3" fill="#231F20"/><circle cx="4" cy="-47" r="1.3" fill="#231F20"/><rect x="-13" y="-58" width="26" height="6" rx="3" fill="#fff"/><path d="M-12 -56Q-8 -78 16 -74Q18 -64 12 -56Z" fill="#DD0A2D"/><circle cx="18" cy="-74" r="5" fill="#fff"/></g></g><g id="sgift"><rect x="500" y="254" width="26" height="20" fill="#1b7a41"/><rect x="510" y="254" width="6" height="20" fill="#F2C14E"/><rect x="500" y="262" width="26" height="4" fill="#F2C14E"/><rect x="498" y="249" width="30" height="6" fill="#249c55"/><ellipse cx="508" cy="246" rx="5" ry="3" fill="#F2C14E"/><ellipse cx="518" cy="246" rx="5" ry="3" fill="#F2C14E"/></g>
+</g></g>
+<g id="walker" tabindex="0" role="button" aria-label="Santa with the gift box. Tap to say hello."><g id="wbody">
+<rect x="-11" y="-6" width="9" height="6" rx="2" fill="#231F20"/><rect x="2" y="-6" width="9" height="6" rx="2" fill="#231F20"/>
+<rect x="-10" y="-27" width="8" height="22" fill="#B7162A"/><rect x="2" y="-27" width="8" height="22" fill="#B7162A"/>
+<path d="M-17 -28Q-19 -62 -10 -67L10 -67Q19 -62 17 -28Z" fill="#DD0A2D"/>
+<rect x="-18" y="-31" width="36" height="5" rx="2.5" fill="#fff"/><rect x="-17" y="-46" width="34" height="5" fill="#231F20"/>
+<path d="M-15 -62Q-21 -50 -13 -43" stroke="#DD0A2D" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M15 -62Q21 -50 13 -43" stroke="#DD0A2D" stroke-width="7" fill="none" stroke-linecap="round"/>
+<circle cx="0" cy="-76" r="9" fill="#f4c7a1"/>
+<path d="M-9.5 -75Q-12 -55 0 -54Q12 -55 9.5 -75Q0 -69 -9.5 -75Z" fill="#fff"/>
+<circle cx="-3.5" cy="-78.5" r="1.2" fill="#231F20"/><circle cx="3.5" cy="-78.5" r="1.2" fill="#231F20"/><circle cx="-6" cy="-75" r="1.8" fill="#ff9aa8" opacity=".7"/><circle cx="6" cy="-75" r="1.8" fill="#ff9aa8" opacity=".7"/><circle cx="0" cy="-75.5" r="1.7" fill="#f0a58a"/>
+<ellipse id="wmouth" cx="0" cy="-69.5" rx="2.6" ry="1.1" fill="#8b1a2b"/>
+<path d="M-10 -84Q-6 -106 15 -99Q17 -91 10 -84Z" fill="#DD0A2D"/><rect x="-11.5" y="-86" width="23" height="5.5" rx="2.7" fill="#fff"/><circle cx="15.5" cy="-99" r="4.2" fill="#fff"/>
+<g id="wbox"><rect x="-14" y="-50" width="28" height="22" fill="#1b7a41"/><rect x="-3" y="-50" width="6" height="22" fill="#F2C14E"/><rect x="-14" y="-41" width="28" height="5" fill="#F2C14E"/><rect x="-16" y="-55" width="32" height="7" fill="#249c55"/><rect x="-3" y="-55" width="6" height="7" fill="#F2C14E"/><ellipse cx="-5" cy="-58" rx="5" ry="3" fill="#F2C14E"/><ellipse cx="5" cy="-58" rx="5" ry="3" fill="#F2C14E"/></g>
+<g id="wcake"><ellipse cx="0" cy="-27" rx="19" ry="3.5" fill="#fff" stroke="#F2C14E"/><rect x="-14" y="-39" width="28" height="12" fill="#f7a8b8"/><rect x="-14" y="-40" width="28" height="3.5" fill="#fff"/><rect x="-9" y="-48" width="18" height="9" fill="#fff0d9"/><rect x="-9" y="-49" width="18" height="3" fill="#fff"/><rect x="-5" y="-57" width="2" height="8" fill="#5cc8ff"/><rect x="3" y="-57" width="2" height="8" fill="#ff9ad5"/><ellipse class="flame" cx="-4" cy="-59.5" rx="1.5" ry="2.8" fill="#FFB020"/><ellipse class="flame" cx="4" cy="-59.5" rx="1.5" ry="2.8" fill="#FFB020"/></g>
+<circle cx="-13" cy="-42" r="3.6" fill="#fff"/><circle cx="13" cy="-42" r="3.6" fill="#fff"/>
+</g></g>
+<g id="dbox" tabindex="-1" role="button" aria-label="Open the gift box"><circle id="dglow" cx="0" cy="-15" r="38" fill="#F2E69E" filter="url(#bl)"/><g transform="translate(0 28)"><rect x="-14" y="-50" width="28" height="22" fill="#1b7a41"/><rect x="-3" y="-50" width="6" height="22" fill="#F2C14E"/><rect x="-14" y="-41" width="28" height="5" fill="#F2C14E"/><g id="dlid"><rect x="-16" y="-55" width="32" height="7" fill="#249c55"/><rect x="-3" y="-55" width="6" height="7" fill="#F2C14E"/><ellipse cx="-5" cy="-58" rx="5" ry="3" fill="#F2C14E"/><ellipse cx="5" cy="-58" rx="5" ry="3" fill="#F2C14E"/></g></g></g>
+<g id="cake" tabindex="-1" role="button" aria-label="Cut the birthday cake"><circle id="cglow" cx="0" cy="-20" r="42" fill="#F2E69E" filter="url(#bl)"/>
+<ellipse cx="0" cy="1" rx="32" ry="5.5" fill="#fff" stroke="#F2C14E" stroke-width="1.5"/>
+<rect x="-22" y="-16" width="44" height="16" rx="2" fill="#f7a8b8"/>
+<path d="M-22 -16H22V-12Q19 -8 16 -12Q13 -7 10 -12Q6 -8 3 -12Q0 -7 -4 -12Q-8 -8 -12 -12Q-16 -7 -19 -12Q-21 -10 -22 -12Z" fill="#fff"/>
+<rect x="-15" y="-28" width="30" height="12" rx="2" fill="#fff0d9"/>
+<path d="M-15 -28H15V-24Q12 -20 9 -24Q6 -19 2 -24Q-2 -19 -6 -24Q-10 -19 -13 -24Q-14 -22 -15 -24Z" fill="#fff"/>
+<ellipse cx="0" cy="-28.5" rx="15" ry="3" fill="#fff"/>
+<circle cx="12" cy="-31.5" r="2.6" fill="#EF003F"/><circle cx="-14" cy="-31.5" r="2.6" fill="#EF003F"/>
+<g id="cgap"><rect x="0" y="-31" width="12" height="31" fill="#ffe2b8"/><path d="M0 -16H12" stroke="#f0c487" stroke-width=".8"/></g>
+<g id="cslice"><ellipse cx="6" cy="1" rx="13" ry="3" fill="#fff" stroke="#F2C14E" stroke-width="1"/><rect x="0" y="-16" width="12" height="16" fill="#f7a8b8"/><rect x="0" y="-17" width="12" height="4" fill="#fff"/><rect x="0" y="-28" width="12" height="12" fill="#fff0d9"/><rect x="0" y="-30" width="12" height="3" fill="#fff"/></g>
+<rect x="-12" y="-41" width="2.4" height="9" fill="#5cc8ff"/><rect x="-6" y="-41" width="2.4" height="9" fill="#F2C14E"/><rect x="0" y="-41" width="2.4" height="9" fill="#ff9ad5"/>
+<ellipse class="flame" cx="-10.8" cy="-44" rx="1.7" ry="3.2" fill="#FFB020"/><ellipse class="flame" cx="-4.8" cy="-44" rx="1.7" ry="3.2" fill="#FFB020"/><ellipse class="flame" cx="1.2" cy="-44" rx="1.7" ry="3.2" fill="#FFB020"/>
+<g id="cknife"><rect x="3" y="-56" width="7" height="16" rx="2" fill="#6b4226"/><polygon points="4,-40 10,-40 10,-4 4,-1" fill="#e8edf2" stroke="#9aa5b1" stroke-width=".8"/></g></g>
+<g id="g2" tabindex="-1" role="button" aria-label="Open the second gift"><circle id="g2glow" cx="0" cy="-15" r="38" fill="#F2E69E" filter="url(#bl)"/><g transform="translate(0 28)"><rect x="-14" y="-50" width="28" height="22" fill="#1A4D89"/><rect x="-3" y="-50" width="6" height="22" fill="#EF003F"/><rect x="-14" y="-41" width="28" height="5" fill="#EF003F"/><g id="g2lid"><rect x="-16" y="-55" width="32" height="7" fill="#2a6cb8"/><rect x="-3" y="-55" width="6" height="7" fill="#EF003F"/><ellipse cx="-5" cy="-58" rx="5" ry="3" fill="#EF003F"/><ellipse cx="5" cy="-58" rx="5" ry="3" fill="#EF003F"/></g></g></g>
+<g id="bubble"><polygon id="tail" fill="#fff" stroke="#F2C14E" stroke-width="3"/><rect id="brect" y="-26" height="52" rx="26" fill="#fff" stroke="#F2C14E" stroke-width="3"/><text id="btxt" y="9" text-anchor="middle" fill="#B7162A" font-family="'Mountains of Christmas',Georgia,serif" font-size="28" font-weight="700"></text></g>
+<g id="burst"></g>
+</svg>
+<div class="snow" id="snow" aria-hidden="true"></div>
+<div class="cardwrap" id="cardwrap" role="dialog" aria-label="Birthday and Christmas card">
+<div class="dim" id="dim"></div>
+<div class="card" id="card">
+<div class="card-page cart-page-front">
+<div class="card-page cart-page-outside"><svg class="cvstar" viewBox="-12 -12 24 24" aria-hidden="true"><use href="#s" fill="#F2C14E"/></svg><i class="cvflake" style="top:7%;left:9%" aria-hidden="true">❄</i><i class="cvflake" style="top:9%;right:9%" aria-hidden="true">❄</i><i class="cvflake" style="bottom:8%;left:10%" aria-hidden="true">❄</i><i class="cvflake" style="bottom:7%;right:10%" aria-hidden="true">❄</i><span class="cv-for">For</span><span class="cv-name">Vo Thi S.Ny</span><svg class="cvdiv" viewBox="0 0 200 16" aria-hidden="true"><path d="M4 8H80M120 8H196" stroke="#F2C14E" stroke-width="1.6" stroke-linecap="round"/><g fill="#F2C14E"><use href="#s" transform="translate(100 8) scale(.7)"/><circle cx="86" cy="8" r="2"/><circle cx="114" cy="8" r="2"/></g></svg><span class="cv-sub">Happy Birthday &amp; Merry Christmas</span></div>
+<div class="card-page cart-page-inside"><span class="merry-christmas"><svg version="1.1" id="xmasScript" aria-label="Merry Christmas" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 540.054 551.88" enable-background="new 0 0 540.054 551.88"
+	 xml:space="preserve">
+<path fill="#0A0A0A" d="M408.424,259.126c-6.145,0.44-11.873,2.104-17.349,4.458c1.873-7.48,7.205-30.873-6.877-29.254
+	c-1.13,0.129-1.724,0.823-1.892,1.648c-0.16,0.177-0.31,0.373-0.429,0.615c-3.015,6.094-5.718,14.199-9.76,19.695
+	c-1.472,2-2.722,4.848-5.667,6c-7.667,3-1-20.667,0.403-26.008c1.336-5.086-5.09-5.446-9.21-5.564
+	c-1.478-0.042-2.408,0.997-2.672,2.134c-1.771,4.952-4.872,14.68-4.664,22.817c-1.675,2.943-5.191,12.621-10.857,13.621
+	c-8.242,1.454-2.563-16.957-2-20.334c1.333-8,2.628-11.805-5.333-15c-2.264-0.908-5.406-1.915-7.769-2.502
+	c0.089-0.499,0.184-0.998,0.258-1.5c0.452-3.046,0.324-8.625-2.972-10.302c-3.246-1.651-7.683-1.042-9.018,2.881
+	c-2.086,6.129,1.369,9.709,6.025,11.925c-1.409,5.57-3.866,10.902-6.185,16.131c-2.527,5.698-5.047,11.584-8.066,17.048
+	c-0.503,0.889-1.105,1.706-1.777,2.474c-0.19,0.137-0.375,0.295-0.542,0.504c-0.147,0.184-0.301,0.334-0.453,0.499
+	c-0.32-1.622-0.045-3.463,0.099-5.091c0.205-2.319,0.537-4.664,0.959-6.956c1.638-8.898,5.757-23.821-7.247-27.625
+	c-2.769-1.015-5.481-2.27-8.029-3.789c0.729-3.351,1.066-6.749,0.714-10.099c-0.746-7.1-9.771-11.932-14.462-5.102
+	c-4.469,6.505,1.533,12.914,8.042,17.405c-1.567,5.595-4.063,11.042-6.443,16.208c-2.243,4.867-11.502,24.063-17.053,12.175
+	c-1.347-2.884-1.583-6.25-1.22-9.587c6.726-0.07,13.875-8.967,13.043-15.18c-0.25-1.867-1.442-3.323-2.996-4.121
+	c-4.746-3.586-10.56-2.08-15.424,1.055c-5.327,3.432-8.329,8.822-8.991,15.068c-0.485,4.564,0.015,9.123,1.842,13.173
+	c-0.671,2.181-1.46,4.302-2.526,6.266c-2.609,4.809-5.47-0.677-6.093-3.317c-0.732-3.105-3.745-21.835-4.826-27.99
+	c-0.839-4.777-2.416-9.121-6.94-11.494c-10.193-5.347-16.953,14.511-20.619,34.844c-0.15-1.523-0.739-13.674-0.972-15.188
+	c-0.754-4.909-1.971-10.466-5.743-13.968c-4.074-3.782-9.072,0.642-11.787,3.652c-0.854,0.947-1.633,1.957-2.358,3.01
+	c1.254-6.39,2.11-12.837,1.72-19.314c-0.468-7.769-12.292-8.248-17.77-6.557c-0.584,0.182-0.993,0.496-1.252,0.881
+	c-0.352,0.365-0.592,0.87-0.618,1.536c-0.461,11.669-2.083,23.257-2.582,34.933c-0.246,5.756-0.359,11.518-0.576,17.275
+	c-0.173,4.633-1.224,9.381-0.674,14.004c-0.065,0.294-0.071,0.599,0.018,0.902c0.062,0.21,0.139,0.41,0.224,0.605
+	c0.016,0.078,0.027,0.156,0.044,0.234c0.207,0.955,0.807,1.531,1.521,1.787c15.66,5.629,13.604-13.445,16.139-23.459
+	c1.607-6.35,3.581-13.52,7.333-19c2.295-3.353,4.394-5.369,5.333-1c0.722,3.357,1.002,10.45,1.042,13.863
+	c0.079,6.824,0.312,13.729,1.365,20.477c0.133,0.851,7.386,6.916,12.593,0.66c1.244-1.494,1.333-10,3.088-19.338
+	c0.628-3.344,1.549-6.59,2.556-9.836c0.305-0.986,3.55-9.936,5-7.762c1.556,2.336,1.679,18.956,2.082,23.988
+	c0.771,9.63,5.483,19.66,17.274,16.613c5.786-1.496,9.039-6.484,11.333-12.666c5.667,6.666,14.002,5.833,19.671,2.529
+	c0.402-0.234,0.683-0.529,0.88-0.852c2.013-1.537,3.779-3.596,5.123-5.467c4.225-5.885,7.139-12.777,9.854-19.457
+	c0.973-2.395,1.935-4.897,2.751-7.459c0.509,0.287,1.002,0.558,1.482,0.814c0.128,0.186,0.275,0.365,0.468,0.531
+	c2.325,1.996,1.456,5.473,0.881,7.986c-0.889,3.889-1.482,7.822-1.986,11.775c-0.613,4.807-1.573,9.453-1.231,14.329
+	c0.734,10.451,12.601,13.38,19.37,6.712c2.306-1.92,3.896-4.813,5.129-7.449c4.693-10.033,10.295-20.252,13.13-31.088
+	c0.216,0.063,0.431,0.124,0.646,0.184c0.032,0.029,0.066,0.051,0.088,0.09c1.744,3.153-0.742,13.437-1.256,16.153
+	c-2.333,12.333-3,18.667,3.667,22.333c9.042,4.973,16.05,0.096,21.877-7.192c1.284-1.417,2.431-3.014,3.48-4.706
+	c1.257,2.712,3.392,4.752,6.783,5.612c7.371,1.869,13.013-2.406,17.407-8.41c-1.083,4.436-2.145,8.874-2.98,13.362
+	c-0.004,0.021-0.008,0.043-0.012,0.064c-6.87,4.783-14.099,11.954-13.435,20.629c0.138,1.807,1.163,3.113,2.544,3.811
+	c6.372,6.195,14.074,1.231,18.952-5.764c4.638-6.649,6.664-14.654,8.515-22.522c6.12-3.015,12.377-5.245,19.508-5.757
+	C412.306,263.852,411.632,258.896,408.424,259.126z M263.93,237.873c-0.803,1.768-3.477,4.858-5.943,5.6
+	c0.358-1.313,0.771-2.576,1.212-3.75c0.547-1.458,1.317-2.783,2.211-4.049c0.785-1.5,1.993-1.813,3.625-0.939
+	C264.817,235.837,264.449,236.883,263.93,237.873z M365.309,289.485c1.212-3.271,3.501-6.058,6.237-8.472
+	c-0.521,2.279-1.136,4.535-1.949,6.755c-0.766,2.091-1.837,3.944-3.554,5.409c-0.506,0.432-0.859,0.606-1.102,0.609
+	c-0.147-0.158-0.293-0.33-0.439-0.51C364.358,292.245,365.125,289.979,365.309,289.485z M279.171,220.98
+	c-1.049-1.189-3.856-7.207,0.792-6.802c1.343,0.116,2.209,1.093,2.738,2.224c0.975,2.084,0.594,4.777,0.327,6.969
+	c-0.046,0.374-0.103,0.747-0.16,1.12C281.549,223.412,280.298,222.256,279.171,220.98z M460.261,321.795
+	c-2.297,0.051-4.698,0.373-7.054,0.967c-0.312-0.527-0.628-1.048-0.95-1.556c-2.765-4.362-7.715-7.108-8.257-11.988
+	c1.271-0.249,2.456-0.715,3.303-1.604c1.382-1.451,1.335-3.506,0.256-5.125c-0.635-0.953-2.586-1.854-3.663-2.118
+	c-4.707-1.161-8.634,4.292-9.429,8.232c-0.35,1.737-0.384,3.651-0.209,5.413c0.032,0.319,0.087,0.627,0.142,0.936
+	c-1.194,4.824-2.818,9.509-5.416,13.795c-2.218,3.66-3.302,8.554-7.522,10.611c-3.069,1.498-5.07-0.545-5.334-3.6
+	c-0.702-8.114,4.144-15.97,2.936-24.193c-0.539-3.666-3.685-6.91-7.546-7.244c-1.315-0.113-2.543,1.014-2.956,2.201
+	c-0.372,1.07-0.735,2.167-1.083,3.283c-0.474-0.447-0.978-0.844-1.503-1.197c-4.403-4.775-12.259-5.602-17.941-2.453
+	c-6.953,3.855-9.684,13.605-9.681,21.375c-1.202,1.977-2.692,4.322-4.335,6.551c-0.136,0.15-0.258,0.311-0.397,0.459
+	c-1.443,1.554-3.092,2.843-4.926,3.898c-2.527,1.455-2.635-1.416-2.886-2.939c-1.141-6.952,1.666-13.807-1.528-20.525
+	c-3.653-7.684-10.047-5.672-15.374-1.322c-2.936,2.396-5.522,5.318-7.486,8.565c-0.076-1.06-0.168-2.119-0.297-3.181
+	c-0.617-5.066-4.673-8.176-9.651-7.184c-5.563,1.109-9.828,7.385-12.553,11.808c-0.41,0.665-0.798,1.343-1.175,2.024
+	c0.194-5.033,0.603-10.133-0.059-15.098c-0.692-5.186-5.552-4.92-9.497-4.622c-1.083,0.081-1.706,0.7-1.946,1.472
+	c-0.196,0.277-0.341,0.617-0.412,1.029c-0.679,3.979-1.224,7.951-1.658,11.936c-1.622,4.756-3.42,9.466-6.394,13.561
+	c-0.307,0.422-0.634,0.824-0.974,1.207c-0.11,0.041-0.219,0.076-0.33,0.137c-2.94,1.57-4.662-6.824-4.906-8.22
+	c-0.814-4.654,0.061-9.686,0.714-14.305c0.635-4.497,1.364-8.981,2.235-13.439c0.105-0.539,0.236-1.069,0.378-1.597
+	c0.42,0.073,0.841,0.147,1.263,0.224c4.383,0.79,8.648,1.079,12.728-0.936c2.89-1.428,0.305-5.71-2.571-4.29
+	c-3.016,1.49-6.515,0.974-9.912,0.287c0.517-1.566,0.985-3.147,1.208-4.81c0.075-0.56-0.023-1.02-0.229-1.392
+	c-0.045-0.641-0.309-1.25-0.856-1.609c-2.438-1.6-4.834-2.195-7.724-2.332c-0.719-0.035-1.343,0.364-1.767,0.928
+	c-0.203,0.178-0.392,0.387-0.549,0.657c-1.304,2.247-2.335,4.739-3.181,7.353c-2.33,0.153-4.645,0.521-6.942,1.184
+	c-3.094,0.891-1.722,5.699,1.382,4.807c1.388-0.4,2.765-0.664,4.137-0.828c-1.098,4.696-1.791,9.529-2.483,13.885
+	c-0.53,3.335-0.896,6.857-0.917,10.385c-3.426,1.811-6.832,3.984-10.031,6.457c-5.628-11.931-11.693-25.008,0.925-32
+	c0.531-0.295,0.873-0.688,1.06-1.119c0.396-0.575,0.564-1.317,0.286-2.164c-1.721-5.236-7.724-6.742-12.485-5.035
+	c-0.323,0.041-0.658,0.155-0.996,0.362c-0.113,0.068-0.215,0.145-0.326,0.214c-0.993,0.516-1.907,1.172-2.664,1.996
+	c-5.104,4.49-7.203,10.863-6.915,17.957c0.065,1.615,0.319,3.197,0.69,4.758c-1.473,4.01-3.142,7.934-5.138,11.746
+	c-1.854,3.541-4.122,8.018-7.381,10.782c-0.321,0.022-0.661,0.119-1.012,0.31c-4.804,2.611-3.137-11.627-2.837-13.236
+	c0.785-4.214,2.301-8.338,2.565-12.637c0.4-6.508-6.321-8.827-11.453-6.123c-0.801,0.422-1.196,1.086-1.302,1.785
+	c-0.022,0.056-0.051,0.103-0.07,0.16c-1.207,3.733-2.928,9.746-3.682,15.844c-0.948,2.313-1.948,4.604-3.07,6.848
+	c-1.732,3.465-5,9.518-8.887,12.113c-0.366,0.063-0.741,0.222-1.109,0.53c-0.122,0.103-0.244,0.183-0.366,0.277
+	c-0.289,0.118-0.58,0.217-0.873,0.288c-2.352,0.576,0.619-16.209,0.891-17.508c1.781-8.487-0.302-15.61-8.368-19.57
+	c-0.847-0.416-1.717-0.775-2.599-1.105c0.453-4.509-0.037-8.852-2.241-12.449c-0.046-0.131-0.092-0.262-0.165-0.396
+	c-2.191-4.104-7.075-5.24-11.055-2.865c-4.282,2.555-4.094,8.762-1.85,12.619c1.901,3.268,5.42,4.953,8.943,6.233
+	c0.072,0.311,0.193,0.611,0.364,0.884c-0.454,1.828-0.976,3.596-1.413,5.209c-1.577,5.817-3.935,12.012-6.664,17.387
+	c-1.665,3.279-3.677,6.613-6.358,9.158c-2.974,2.82-2.679-5.398-2.763-6.967c-0.274-5.111-0.797-13.539-7.785-12.937
+	c-1.818,0.157-3.362,0.883-4.673,1.985c0.35-6.104,0.682-12.207,0.969-18.314c0.323-6.888,1.456-14.306-0.244-21.08
+	c-1.645-6.557-7.007-7.266-12.705-7.285c-1.728-0.006-2.521,1.422-2.401,2.754c-0.068,0.234-0.118,0.482-0.118,0.758
+	c-0.008,2.517-0.665,8.605-1.382,16.3c-4.275,13.324-8.808,26.704-16.4,38.53c-0.856,1.332-1.885,2.816-3.058,4.215
+	c-0.221,0.132-0.436,0.291-0.631,0.51c-0.683,0.764-1.378,1.516-2.089,2.25c-2.423,2.022-5.27,3.242-8.447,2.338
+	c-6.46-1.84-7.639-11.588-7.853-17.121c-0.59-15.274,5.032-50.82,27.228-45.957c1.721,0.378,2.999-0.893,3.273-2.221
+	c0.129-0.471,0.099-1.01-0.179-1.593c-5.391-11.304-21.279-10.751-30.837-5.546c-12.958,7.057-16.732,23.674-17.865,37.146
+	c-1.081,12.859-0.091,31.237,10.372,40.525c10.066,8.935,20.269,3.538,28.248-4.523c0.371-0.33,0.736-0.667,1.084-1.015
+	c5.312-5.294,8.684-12.483,11.898-19.151c1.37-2.843,2.604-5.744,3.759-8.681c-1.094,21.095-0.058,42.746,10.608,39.853
+	c0.612,0.042,1.254-0.122,1.836-0.602c1.856-1.529,2.811-3.461,3.047-5.876c0.423-4.313,0.841-8.667,1.106-12.994
+	c0.029-0.474,0.055-0.948,0.084-1.422c0.744-2.872,2.04-5.552,4.186-7.634c4.016-3.896,3.906,5.043,4.03,7.344
+	c0.278,5.185,1.018,14.533,8.667,11.76c7.027-2.548,10.771-14.33,13.25-20.424c1.593-3.917,3.619-8.845,4.956-13.94
+	c1.566,3.384-1.042,11.239-1.647,13.267c-1.476,4.941-2.356,10.434-1.964,15.589c0.706,9.278,11.976,11.216,18.402,6.605
+	c3.332-1.757,6.134-5.604,8.04-8.131c1.101-1.46,2.081-3.003,2.998-4.586c1.211,5.622,4.609,9.733,12.011,9.672
+	c7.101-0.059,11.214-5.362,14.678-10.935c2.319-3.731,4.263-7.62,5.963-11.614c2.494,5.507,5.872,10.794,8.059,16.11
+	c0.122,0.296,0.243,0.592,0.365,0.887c-2.071,2.531-3.853,5.227-5.233,8.051c-2.235,4.572-1.938,10.06,1.919,13.577
+	c0.492,0.448,1.026,0.776,1.581,1.019c2.955,3.153,8.446,0.907,11.498-0.992c5.925-3.688,6.264-9.9,5.278-16.197
+	c-0.465-2.975-1.808-6.379-3.436-9.988c2.62-2.053,5.406-3.893,8.191-5.485c0.415,3.625,1.309,7.151,2.914,10.368
+	c3.135,6.28,11.169,8.172,16.498,3.572c1.966-1.697,3.571-3.658,4.938-5.781c-0.023,4.055,0.58,8.397,3.894,10.92
+	c0.357,0.271,0.728,0.422,1.094,0.49c0.148,0.041,0.301,0.076,0.47,0.094c1.517,0.146,6.129-0.796,6.649-2.145
+	c2.517-6.523,4.879-13.422,8.739-19.307c0.129-0.097,0.255-0.202,0.375-0.332c0.863-0.926,1.713-1.857,2.613-2.748
+	c2.502-2.475,2.983,0.896,2.951,2.806c-0.054,3.146-0.345,6.255,0.466,9.348c1.156,4.401,3.6,10.899,9.298,9.868
+	c0.047-0.008,0.087-0.026,0.133-0.037c2.893-0.604,2.249-2.187,2.593-5.282c1.062-7.313,2.738-14.266,7.951-19.983
+	c2.406-2.638,3.516,1.379,3.458,3.277c-0.095,3.143,0.239,6.271,0.462,9.402c0.249,3.491,0.274,7.195,1.878,10.407
+	c3.042,6.089,9.097,5.726,14.351,2.589c2.73-1.63,5.002-3.938,7.014-6.527c0.79-0.836,1.535-1.721,2.248-2.633
+	c2.311,5.133,7.343,8.613,13.488,6.277c5.206-1.979,8.373-6.264,10.663-11.111c0.003,0.992,0.035,1.977,0.109,2.949
+	c0.443,5.781,2.322,12.656,8.681,14.157c6.782,1.601,13.651-3.394,16.59-9.077c3.014-5.826,5.978-11.104,8.182-16.93
+	c1.69,2.215,3.788,4.211,5.697,6.215c-1.943,1.607-3.578,3.559-4.705,5.9c-2.504,5.201-2.437,13.383,5.157,13.818
+	c1.853,0.106,5.827-0.85,7.13-1.448c4.467-2.05,7.093-7.038,6.412-12.717c-0.242-2.015-0.845-3.987-1.645-5.888
+	c1.505-0.325,2.975-0.504,4.309-0.533C463.024,326.706,463.48,321.725,460.261,321.795z M188.352,301.441
+	c-0.942-0.343-1.874-0.711-2.781-1.141c-1.822-0.864-3.352-2.31-3.907-4.281c-0.647-2.295,1.561-5.789,3.488-4.93
+	c0.107,0.214,0.24,0.426,0.432,0.63C188.093,294.385,188.643,297.85,188.352,301.441z M262.668,352.641
+	c-0.679,2.059-2.257,2.356-4.736,0.896c-1.603-2.24-0.157-5.558,0.847-7.611c0.641-1.311,1.408-2.587,2.267-3.83
+	c0.501,1.384,0.972,2.779,1.354,4.215C262.957,348.4,263.166,350.529,262.668,352.641z M399.04,324.032
+	c-1.301,2.104-5.967,10.753-8.043,5.184c-1.247-3.347,0.451-8.728,1.844-11.843c1.66-3.712,5.99-6.674,9.446-5.381
+	c1.393,0.712,1.355,1.988,1.422,2.088C402.629,317.688,400.541,321.604,399.04,324.032z M447.175,338.299
+	c-0.397,3.41-5.654,5.101-5.223,0.588c0.29-3.033,1.956-5.486,4.283-7.371C447.3,333.583,447.464,335.817,447.175,338.299z
+	 M223.894,292.253c-1.772-3.511-0.005-8.671,3.667-10.292c0.365-0.162,0.747-0.25,1.123-0.273c1.069-0.67,2.285-1.07,3.589-1.021
+	c3.533,0.135,5.696,3.474,5.627,6.785c-0.071,3.384-1.722,6.66-5.083,7.813C229.756,296.314,225.461,295.355,223.894,292.253z
+	 M308.336,425.396c-5.223-8.412-5.395-17.662-8.412-26.787c-1.359-4.113-4.332-9.742-8.426-12.928
+	c1.357-0.906,2.586-2.051,3.658-3.121c1.939-1.938,5.084-5.66,2.957-8.486c-2.625-3.483-6.977-0.607-10.061,3.186
+	c-0.195-3.039-1.205-6.039-2.945-8.348c-0.449-0.596-1.426-0.861-2.096-0.494c-3.602,1.968-4.486,5.473-3.988,9.096
+	c-0.645-0.423-1.311-0.816-2.016-1.146c-2.406-1.127-6.156-1.715-8.18,0.41c-2.232,2.342-0.52,5.75,1.561,7.461
+	c1.535,1.264,3.385,2.334,5.318,3.154c-3.342,3.002-6.027,7.102-7.779,10.5c-4.67,9.063-4.26,19.441-10.785,27.766
+	c-0.432,0.549-0.467,1.106-0.27,1.564c-0.113,0.512,0.018,1.057,0.543,1.438c4.328,3.127,10.275,4.57,16.166,5.256
+	c-0.072,2.406,1.021,4.623,3.855,5.092c2.941,0.488,5.65-1.881,6.91-4.469c4.621,0.059,8.988-0.834,13.396-2.129
+	c2.826-0.832,6.23-1.631,8.572-3.602C307.777,428.998,309.396,427.104,308.336,425.396z M290.861,379.414
+	c0.773-0.965,1.715-1.814,2.701-2.555c0.422-0.316,1.707-0.59,1.645-0.781c0.445,1.385-2.645,3.986-3.471,4.744
+	c-0.98,0.9-2.387,2.168-3.813,2.837C288.561,382.207,290,380.488,290.861,379.414z M283.254,372.627
+	c1.404,2.905,1.195,5.984,0.563,9.111C282.434,378.662,281.416,374.834,283.254,372.627z M271.51,379.096
+	c1.439-0.957,4.23,0.541,5.492,1.246c1.6,0.896,2.699,2.324,3.809,3.738c-0.592,0.24-1.17,0.533-1.736,0.855
+	C275.746,383.293,269.852,380.198,271.51,379.096z M282.422,428.195c-3.604,0.094-7.209-0.127-10.764-0.699
+	c-2.049-0.33-4.004-1.096-5.963-1.793c1.998-2.264,3.27-5.561,4.246-8.104c3.371-8.783,1.41-19.32,9.004-26.148
+	c11.117-9.994,14.707,11.941,15.469,18.465c0.658,5.637,1.75,10.769,4.873,14.936C293.908,426.943,288.521,428.035,282.422,428.195z
+	 M321.808,144.121c-1.422,1.533-2.969,2.535-4.684,3.527c-1.709,0.988-8.504,4.634-9.122,0.725c-0.183-0.386-0.243-0.873-0.082-1.41
+	c0.069-0.227,0.156-0.443,0.25-0.655c0.625-1.88,2.575-3.097,4.015-3.896l0,0c0.53-0.303,1.055-0.574,1.543-0.817
+	c2.129-1.065,4.643-2.479,6.982-2.228C322.936,139.607,323.423,142.385,321.808,144.121z M328.172,172.662
+	c-3.793,1.312-12.827,2.691-14.633-2.268c-0.752-2.069,0.467-3.036,2.34-3.361c4.24-1.541,9.16-0.662,12.784,2.05
+	C330.049,170.12,329.875,172.072,328.172,172.662z M324.916,197.143c-1.335,2.791-5.577,0.688-7.417-0.281
+	c-2.016-1.059-5.563-2.74-6.187-5.203c-0.203-0.801,0.03-1.658,0.644-2.126c0.238-0.397,0.643-0.692,1.215-0.726
+	C316.851,188.586,327.475,191.793,324.916,197.143z M233.856,152.488c-0.237,0.131-0.514,0.209-0.835,0.191
+	c-3.007-0.154-6.901-1.332-8.833-3.824c-1.316-1.701-2.986-4.377-1.227-6.336c2.125-2.367,7.309,0.695,9.703,2.277
+	c0.1,0.059,0.205,0.119,0.303,0.178c1.395,0.83,4.222,2.334,4.225,4.27c0.008,0.033,0.025,0.065,0.031,0.1
+	C237.565,151.362,235.669,152.52,233.856,152.488z M230.982,173.435c-1.393,1.3-3.721,1.729-5.535,1.979
+	c-2.929,0.404-9.467,0.411-9.453-3.871c0.008-2.277,2.846-3.678,4.752-3.949c1.42-0.203,2.926-0.299,4.389-0.137
+	c2.098-0.279,4.139,0.038,5.646,1.414C232.195,170.161,232.443,172.07,230.982,173.435z M234.063,191.785
+	c-0.673,1.549-2.277,2.795-3.684,3.646c-2.131,1.293-7.573,3.701-8.916,0.16c-0.793-2.094,1.219-4.018,2.82-5.041
+	c2.022-1.943,5.043-3.156,7.463-2.689C233.645,188.229,234.885,189.895,234.063,191.785z M296.14,189.635
+	c-1.104,4.083-7.115,2.278-11.797-0.326c-0.054,0.566-0.196,1.088-0.486,1.482c-1.417,1.93-3.429,1.348-5.439,0.785
+	c-1.392-0.389-2.955-1.035-4.287-1.937c-1.921,1.688-4.589,3.128-6.68,2.35c-1.295-0.481-2.037-1.654-2.309-3.003
+	c-4.101,1.89-9.116,1.963-13.158,0.122c-0.898-0.409-1.146-1.304-0.686-2.151c0.67-1.236,1.87-2.507,3.237-3.609
+	c-2.208-0.544-4.239-1.514-5.653-2.916c-0.543-0.538-0.559-1.465-0.008-2.006c1.861-1.824,4.303-2.32,6.713-3.072
+	c1.243-0.389,2.343-1.06,3.408-1.803c-2.771-0.641-5.069-2.195-4.321-4.97c0.688-2.548,3.37-3.468,5.471-4.599
+	c1.62-0.871,2.862-2.019,4.045-3.221c0.102-0.169,0.203-0.338,0.301-0.508c-1.67-0.475-3.289-1.338-4.72-2.131
+	c-0.718-0.397-0.846-1.671-0.151-2.158c1.973-1.383,3.707-2.889,5.275-4.504c-0.562-0.574-0.789-1.381-0.392-2.521
+	c0.668-1.92,2.366-3.146,3.849-4.43c1.78-1.54,2.971-3.471,4.544-5.175c0.269-0.292,0.606-0.386,0.933-0.347
+	c0.707-0.57,2.092-0.457,2.498,0.701c1.061,3.03,3.752,5.49,5.982,7.695c1.026,1.015,2.254,2.354,1.722,3.914
+	c-0.293,0.858-0.995,1.34-1.885,1.592c0.318,0.398,0.655,0.783,1.036,1.133c0.85,0.781,1.873,1.389,2.766,2.122
+	c1.496,1.228,3.127,3.204,1.646,5.081c-0.693,0.879-1.709,1.33-2.878,1.475c1.904,0.926,4.104,1.422,6.026,2.4
+	c2.042,1.043,3.669,3.069,1.584,5.077c-1.285,1.236-3.229,1.612-5.104,1.686c0.6,0.649,1.212,1.286,1.895,1.851
+	c1.149,0.949,2.333,1.509,3.654,2.152c2.046,1,1.814,2.939,0.509,4.447c-0.993,1.146-2.275,1.703-3.674,1.875
+	c0.343,0.256,0.683,0.511,1.011,0.768C292.313,184.283,296.874,186.922,296.14,189.635z M233.117,380.289c0,2.761-2.238,5-5,5
+	s-5-2.239-5-5c0-2.762,2.238-5,5-5S233.117,377.527,233.117,380.289z M241.117,414.289c0,2.761-2.238,5-5,5s-5-2.239-5-5
+	c0-2.762,2.238-5,5-5S241.117,411.527,241.117,414.289z M337.117,413.289c0,2.761-2.238,5-5,5s-5-2.239-5-5c0-2.762,2.238-5,5-5
+	S337.117,410.527,337.117,413.289z M201.867,399.289c0,2.07-1.679,3.75-3.75,3.75s-3.75-1.68-3.75-3.75
+	c0-2.071,1.679-3.75,3.75-3.75S201.867,397.218,201.867,399.289z M331.617,377.289c0,2.07-1.679,3.75-3.75,3.75
+	s-3.75-1.68-3.75-3.75c0-2.071,1.679-3.75,3.75-3.75S331.617,375.218,331.617,377.289z M366.867,385.289
+	c0,2.07-1.679,3.75-3.75,3.75s-3.75-1.68-3.75-3.75c0-2.071,1.679-3.75,3.75-3.75S366.867,383.218,366.867,385.289z"/>
+</svg></span></div>
+</div>
+<div class="card-page cart-page-bottom">
+<p class="wh">Happy Birthday,<br>Vo Thi S.Ny!</p>
+<p class="wb">May your day be full of joy, laughter and sweet surprises.</p>
+<p class="wh">Merry Christmas!</p>
+<p class="wb">Wishing you a warm, bright and magical Christmas.</p>
+<p class="wf">With love, Santa</p>
+</div>
+</div>
+<span class="click-icon" id="cclick"><svg aria-hidden="true" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M31.6 17.7V26c0 1.9-.7 3.7-2 5.1v.9c0 1.6-1.3 3-3 3h-8.4c-1.6 0-3-1.3-3-3 0-.6.5-1 1-1s1 .4 1 1c0 .5.4 1 1 1h8.4c.5 0 1-.4 1-1v-1.2-.3-.1c0-.1.1-.2.2-.3 1.1-1.1 1.7-2.5 1.7-4v-8.3c0-.3-.1-.5-.3-.7-.1-.1-.5-.4-1-.3-.4.1-.8.6-.8 1.1v2.4c0 .6-.5 1-1 1s-1-.4-1-1v-5.5c0-.3-.1-.5-.3-.7s-.4-.3-.7-.3c-.5 0-1 .5-1 1v5.5c0 .6-.5 1-1 1s-1-.4-1-1v-8.5c0-.3-.1-.5-.3-.7s-.4-.3-.7-.3c-.5 0-1 .5-1 1v8.5c0 .6-.5 1-1 1s-1-.4-1-1V7.7c0-.3-.1-.5-.3-.7-.1-.1-.5-.4-1-.3-.4.1-.8.6-.8 1.1V20c0 .4-.2.8-.6.9-.4.2-.8.1-1.1-.2L11 18.1c-.6-.6-1.6-.6-2.2.1-.5.6-.4 1.5.2 2.1l7 7c.4.4.4 1 0 1.4-.2.2-.5.3-.7.3-.3 0-.5-.1-.7-.3l-7-7.1c-1.3-1.3-1.5-3.5-.3-4.8C8 16 9 15.5 10 15.5c.9 0 1.8.4 2.5 1l.9.9V7.9c0-1.4.9-2.7 2.3-3 1-.3 2.1 0 2.8.8.6.6.9 1.3.9 2.1V9c.3-.1.7-.2 1-.2.8 0 1.5.3 2.1.9s.9 1.3.9 2.1v.2c.3-.1.7-.2 1-.2.8 0 1.5.3 2.1.9s.9 1.3.9 2.1v.2c.1 0 .2-.1.3-.1 1-.3 2.1 0 2.8.8.8.5 1.1 1.3 1.1 2z"/></svg></span>
+</div>
+</div>
+<p class="vh" id="note" aria-live="polite"></p>
+<button class="rp" id="replay" type="button" aria-label="Replay"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var bub=$('bubble'),bt=$('btxt'),br=$('brect'),tail=$('tail'),santa=$('santa'),walker=$('walker'),sgift=$('sgift'),dbox=$('dbox'),cwrap=$('cardwrap'),card=$('card'),cclick=$('cclick'),rud=$('rudolph'),rg=$('rglow'),tilt=$('tilt'),sleigh=$('sleigh'),burst=$('burst'),note=$('note'),snow=$('snow'),timers=[];
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!reduce){for(var i=0;i<46;i++){var f=document.createElement('i'),s=2+Math.random()*3.5;f.style.cssText='left:'+(Math.random()*100)+'%;width:'+s+'px;height:'+s+'px;animation-duration:'+(6+Math.random()*7)+'s;animation-delay:-'+(Math.random()*12)+'s;--dx:'+(20+Math.random()*70)+'px';snow.appendChild(f);}}
+var P=[[-58,-38],[-30,-30],[0,-40],[30,-30],[58,-38],[-30,-68],[30,-70],[-44,-98],[-20,-90],[8,-100],[40,-96],[-20,-130],[22,-128],[-30,-150],[0,-146],[28,-152],[-12,-175],[14,-180]],BC=['#ff3b5c','#ffd75e','#5cc8ff','#ff9ad5','#ffffff'];
+P.forEach(function(p,i){[['halo',9,.8],['core',3.6,1]].forEach(function(q){var c=document.createElementNS('http://www.w3.org/2000/svg','circle');c.setAttribute('cx',p[0]);c.setAttribute('cy',p[1]);c.setAttribute('r',q[1]);c.setAttribute('fill',BC[i%BC.length]);c.setAttribute('opacity',q[2]);c.setAttribute('class','b');c.style.animationDelay=(i*0.23)+'s';$(q[0]).appendChild(c);});});
+function say(t){note.textContent=t}
+function at(ms,fn){timers.push(setTimeout(fn,ms))}
+var ns='http://www.w3.org/2000/svg',cols=['#F2C14E','#ffffff','#F2E69E','#EF003F','#35b872'];
+function sparkle(x,y,n,far){
+if(reduce)return;
+for(var k=0;k<n;k++){
+var c=document.createElementNS(ns,'circle');
+c.setAttribute('cx',x);c.setAttribute('cy',y);c.setAttribute('r',3+Math.random()*4);c.setAttribute('fill',cols[k%cols.length]);
+burst.appendChild(c);
+var a=Math.random()*Math.PI*2,d=far*(.4+Math.random()*.6);
+if(c.animate)c.animate([{transform:'translate(0,0)',opacity:1},{transform:'translate('+Math.cos(a)*d+'px,'+(Math.sin(a)*d-20)+'px)',opacity:0}],{duration:1000+Math.random()*600,easing:'cubic-bezier(.2,.7,.3,1)',fill:'forwards'});
+}}
+function balloons(){
+if(reduce)return;
+var bc=['#EF003F','#F2C14E','#ffffff','#35b872','#F2E69E','#DD0A2D','#1A4D89'];
+for(var k=0;k<14;k++){
+var o=document.createElementNS(ns,'g'),g=document.createElementNS(ns,'g');
+o.setAttribute('transform','translate('+(80+Math.random()*1040)+' 840)');
+g.innerHTML='<path d="M0 0Q-6 30 0 60" stroke="#fff" stroke-width="1.5" fill="none"/><ellipse cx="0" cy="-26" rx="22" ry="28" fill="'+bc[k%bc.length]+'"/><ellipse cx="-8" cy="-36" rx="5" ry="8" fill="#fff" opacity=".45"/>';
+o.appendChild(g);burst.appendChild(o);
+if(g.animate)g.animate([{transform:'translateY(0)'},{transform:'translateY(-1050px)'}],{duration:5500+Math.random()*3000,delay:Math.random()*1800,easing:'ease-out',fill:'forwards'});
+}}
+function reset(){timers.forEach(clearTimeout);timers=[];if(window.speechSynthesis)speechSynthesis.cancel();sleigh.classList.remove('leave','landed');santa.classList.remove('talk','gone');sgift.classList.remove('gone');walker.classList.remove('walk','back','talk','gave','cakemode');dbox.classList.remove('show','ready','open','poof');cake.classList.remove('show','ready','cut','out');cake.setAttribute('tabindex','-1');g2.classList.remove('show','ready','open');g2.setAttribute('tabindex','-1');lightsOff();fdone=false;dbox.setAttribute('tabindex','-1');cwrap.classList.remove('on','leaving');card.classList.remove('is-opened');cclick.classList.remove('is-hidden');st=0;tree.classList.remove('party');tbusy=false;bub.classList.remove('on');burst.innerHTML='';}
+function start(){
+reset();
+sleigh.classList.remove('go');void sleigh.getBoundingClientRect();sleigh.classList.add('go');
+say('Santa’s sleigh is flying in.');
+at(5200,wish);
+}
+var st=0,bTimer,si=0,ri=0,SM=['Ho ho ho!','Happy Birthday, Vo Thi S.Ny!','Merry Christmas!','Did you make a wish?','Hope your day is magical!','Rudolph says hi!'],RM=['My nose lights the way!','Psst... make a wish!','Santa never gets lost!'];
+function bubble(txt,tx,ty,dir,dur){
+bt.textContent=txt;var w=bt.getComputedTextLength()+44,x,y,pts;
+br.setAttribute('x',-w/2);br.setAttribute('width',w);
+if(dir==='r'){x=Math.max(w/2+20,tx-100-w/2);y=ty;pts=(w/2-16)+',-10 '+(w/2+34)+',14 '+(w/2-16)+',18';}
+else if(dir==='d'){x=Math.min(Math.max(tx,w/2+16),1200-w/2-16);y=ty;pts='-14,24 0,52 14,24';}else{x=tx;y=ty+100;pts='-16,-22 6,-56 18,-22';}
+tail.setAttribute('points',pts);bub.setAttribute('transform','translate('+x+' '+y+')');
+bub.classList.add('on');clearTimeout(bTimer);bTimer=setTimeout(function(){bub.classList.remove('on')},dur||2800);}
+function santaTap(){santa.classList.remove('hop');void santa.getBoundingClientRect();santa.classList.add('hop');var ty=st>=1?612:212;bubble(SM[si++%SM.length],480,ty,'r');sparkle(480,ty-7,12,80);}
+function rudTap(){rg.classList.remove('pulse');void rg.getBoundingClientRect();rg.classList.add('pulse');var ry=st>=1?529:129;bubble(RM[ri++%RM.length],940,ry,'u');sparkle(940,ry,14,80);}
+function bind(el,fn){el.addEventListener('click',fn);el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();fn();}});}
+bind(santa,santaTap);bind(rud,rudTap);bind(walker,function(){bubble(SM[si++%SM.length],340,545,'d');sparkle(340,640,12,80);});
+var stg=document.querySelector('.stage'),port=window.matchMedia('(orientation: portrait)');
+stg.addEventListener('pointermove',function(e){if(reduce||port.matches)return;var r=stg.getBoundingClientRect();tilt.style.transform='translate('+(((e.clientX-r.left)/r.width-.5)*36)+'px,'+(((e.clientY-r.top)/r.height-.5)*20)+'px)';});
+stg.addEventListener('pointerleave',function(){tilt.style.transform='';});
+function speak(t){if(reduce||!window.speechSynthesis)return;try{var u=new SpeechSynthesisUtterance(t);u.rate=.9;u.pitch=.7;speechSynthesis.speak(u);}catch(e){}}
+/* Runs automatically: Santa lands, steps out with a gift box, wishes, then goes */
+function wish(){
+say('Santa has landed.');
+st=1;sleigh.classList.remove('go');void sleigh.getBoundingClientRect();sleigh.classList.add('landed');
+at(1700,function(){sparkle(480,690,14,70);});
+at(1900,function(){say('Santa steps out with a gift box.');st=2;santa.classList.add('gone');sgift.classList.add('gone');walker.classList.remove('back');walker.classList.add('walk');});
+at(3900,function(){say('Santa says Happy Birthday, Vo Thi S.Ny!');walker.classList.add('talk');bubble('Happy Birthday, Vo Thi S.Ny!',340,545,'d',3000);speak('Happy Birthday, Vo Thi S.Ny!');sparkle(340,640,14,80);});
+at(7200,function(){bubble('Merry Christmas!',340,545,'d',2400);speak('Merry Christmas!');sparkle(340,640,18,100);});
+at(9800,function(){say('Santa says: This is your gift!');bubble('This is your gift!',340,545,'d',2400);speak('This is your gift!');});
+at(10300,function(){walker.classList.add('gave');dbox.classList.add('show');sparkle(398,745,18,80);});
+at(12400,function(){walker.classList.remove('talk','walk');walker.classList.add('back');say('Santa walks back to the sleigh.');});
+at(14100,function(){santa.classList.remove('gone');st=1;});
+at(14300,function(){sleigh.classList.remove('landed');sleigh.classList.add('leave');});
+at(15200,function(){dbox.classList.add('ready');dbox.setAttribute('tabindex','0');say('Tap the gift box to open it.');});
+}
+/* Opening the gift: the lid pops, the letter rises out and opens with the wishes */
+function sizeCard(){var W=stg.clientWidth,H=stg.clientHeight,h=Math.min(.84*H,.657*W,520);cwrap.style.setProperty('--ch',h+'px');cwrap.style.setProperty('--cw',(h*.7)+'px');}
+/* Closing the card: it floats away and is gone (the gift box stays open and empty) */
+function closeCard(){
+if(!cwrap.classList.contains('on')||cwrap.classList.contains('leaving'))return;
+cwrap.classList.add('leaving');
+sparkle(600,400,24,260);
+say('The card has gone.');
+at(950,function(){
+if(!fdone){fdone=true;at(500,finale);}
+cwrap.classList.remove('on','leaving');
+card.classList.remove('is-opened');
+cclick.classList.remove('is-hidden');
+});
+}
+function openGift(){
+if(!dbox.classList.contains('ready')||dbox.classList.contains('open'))return;
+dbox.classList.add('open');say('The gift is open and a letter rises out.');
+sparkle(398,735,30,170);
+at(650,function(){sparkle(398,730,36,200);dbox.classList.add('poof');});
+at(700,function(){sizeCard();card.classList.remove('is-opened');cclick.classList.remove('is-hidden');cwrap.classList.add('on');});
+at(2300,function(){card.classList.add('is-opened');cclick.classList.add('is-hidden');say('The letter says: Happy Birthday and Merry Christmas, Vo Thi S.Ny!');});
+}
+bind(dbox,openGift);
+/* Surprise inside the Christmas tree: tap the glowing bauble */
+var tree=$('tree'),tsur=$('tsur'),tbusy=false;
+function flyer(html,x,y,dx,dy,dur,delay,sc){
+if(reduce)return;
+var o=document.createElementNS(ns,'g'),g=document.createElementNS(ns,'g');
+o.setAttribute('transform','translate('+x+' '+y+')');g.innerHTML=html;o.appendChild(g);burst.appendChild(o);
+if(g.animate)g.animate([{transform:'translate(0px,0px) scale(0)',opacity:0},{transform:'translate('+dx*.3+'px,'+dy*.3+'px) scale('+sc+')',opacity:1,offset:.25},{transform:'translate('+dx+'px,'+dy+'px) scale('+sc*.9+') rotate('+(dx>0?25:-25)+'deg)',opacity:0}],{duration:dur,delay:delay,easing:'ease-out',fill:'both'});
+}
+function surprise(){
+if(tbusy)return;tbusy=true;
+tree.classList.add('party');
+say('Surprise! Magic hearts and gifts pop out of the Christmas tree.');
+speak('Surprise!');
+sparkle(205,472,24,130);sparkle(229,584,26,140);
+var HC=['#ff3b5c','#ff9ad5','#F2C14E','#ffffff','#EF003F'],GC=['#1b7a41','#1A4D89','#EF003F','#35b872'];
+for(var i=0;i<16;i++){
+var x=205+(Math.random()-.5)*120,y=600-Math.random()*130,dx=(Math.random()-.5)*400,dy=-(130+Math.random()*280),d=Math.random()*900;
+if(i%3===2)flyer('<rect x="-8" y="-6" width="16" height="12" fill="'+GC[i%GC.length]+'"/><rect x="-1.5" y="-6" width="3" height="12" fill="#F2C14E"/><rect x="-9" y="-9" width="18" height="4" fill="#fff"/>',x,y,dx,dy,2600+Math.random()*1200,d,1.8);
+else flyer('<path d="M0 8C-14 -4 -10 -16 0 -9C10 -16 14 -4 0 8Z" fill="'+HC[i%HC.length]+'"/>',x,y,dx,dy,2600+Math.random()*1200,d,1.6+Math.random());
+}
+flyer('<path d="M0 8C-14 -4 -10 -16 0 -9C10 -16 14 -4 0 8Z" fill="#F2C14E" stroke="#fff" stroke-width=".8"/><ellipse cx="-4" cy="-6" rx="2.2" ry="1.4" fill="#fff" opacity=".85"/>',205,585,0,-130,3400,250,3.4);
+at(500,function(){bubble('Surprise! Wishing you a magical year!',205,390,'d',3800);sparkle(205,560,20,120);});
+at(1200,balloons);
+at(4300,function(){tree.classList.remove('party');tbusy=false;say('The tree is calm again. Tap the glowing bauble for another surprise.');});
+}
+bind(tsur,surprise);
+/* Finale: after the card goes, the village lights up and wishes, Santa returns with a cake */
+var HS=[[160,575],[400,570],[720,575],[1010,570],[70,598],[240,600],[1070,596]],HT=['Happy Birthday!','Happy Birthday, Vo Thi S.Ny!','Many happy returns!','Happy Birthday to you!','Wishing you joy!','Happy Birthday!','Make a wish!'];
+HS.forEach(function(p,i){
+var g=document.createElementNS(ns,'g'),dots='';
+for(var k=0;k<=5;k++){var f=k/5;
+dots+='<circle cx="'+(-38+38*f)+'" cy="'+(-34-30*f)+'" r="2.3" fill="'+BC[(k+i)%BC.length]+'" class="b" style="animation-delay:'+(k*.25)+'s"/>';
+dots+='<circle cx="'+(38*f)+'" cy="'+(-64+30*f)+'" r="2.3" fill="'+BC[(k+i+2)%BC.length]+'" class="b" style="animation-delay:'+(k*.25+.12)+'s"/>';}
+g.setAttribute('transform','translate('+p[0]+' '+p[1]+')');
+g.style.cssText='opacity:0;transition:opacity .7s ease';
+g.innerHTML='<ellipse cx="0" cy="0" rx="42" ry="6" fill="#fff"/><ellipse cx="0" cy="-30" rx="58" ry="48" fill="#FFE9A0" opacity=".28" filter="url(#bl)"/><circle cx="-14.5" cy="-17.5" r="16" fill="#FFD75E" opacity=".55" filter="url(#bl)"/><circle cx="14.5" cy="-17.5" r="16" fill="#FFD75E" opacity=".55" filter="url(#bl)"/><use href="#hl" fill="#FFF4CF"/>'+dots;
+$('hlights').appendChild(g);
+});
+var cake=$('cake'),lights=$('hlights'),fdone=false;
+function lightsOn(){for(var i=0;i<lights.children.length;i++){lights.children[i].style.transitionDelay=(i*.35)+'s';lights.children[i].style.opacity=1;}}
+function lightsOff(){for(var i=0;i<lights.children.length;i++){var c=lights.children[i];c.style.transitionDelay='0s';c.style.opacity=0;}}
+function hbub(txt,x,y,dur){
+var o=document.createElementNS(ns,'g'),g=document.createElementNS(ns,'g'),pl=document.createElementNS(ns,'polygon'),r=document.createElementNS(ns,'rect'),t=document.createElementNS(ns,'text');
+t.setAttribute('text-anchor','middle');t.setAttribute('y','7');t.setAttribute('fill','#B7162A');t.setAttribute('font-family',"'Mountains of Christmas',Georgia,serif");t.setAttribute('font-size','22');t.setAttribute('font-weight','700');t.textContent=txt;
+g.appendChild(pl);g.appendChild(r);g.appendChild(t);o.appendChild(g);burst.appendChild(o);
+var w=t.getComputedTextLength()+34;x=Math.min(Math.max(x,w/2+10),1200-w/2-10);
+r.setAttribute('x',-w/2);r.setAttribute('y',-20);r.setAttribute('width',w);r.setAttribute('height',40);r.setAttribute('rx',20);r.setAttribute('fill','#fff');r.setAttribute('stroke','#F2C14E');r.setAttribute('stroke-width','2.5');
+pl.setAttribute('points','-10,18 0,42 10,18');pl.setAttribute('fill','#fff');pl.setAttribute('stroke','#F2C14E');pl.setAttribute('stroke-width','2.5');
+o.setAttribute('transform','translate('+x+' '+y+')');
+if(g.animate&&!reduce)g.animate([{opacity:0,transform:'scale(.3)'},{opacity:1,transform:'scale(1)',offset:.15},{opacity:1,transform:'scale(1)',offset:.85},{opacity:0,transform:'scale(.9)'}],{duration:dur,fill:'both'});
+at(dur+150,function(){if(o.parentNode)o.parentNode.removeChild(o);});
+}
+function housesWish(delay){
+[4,2,5,3,1,6,0].forEach(function(idx,j){at(delay+j*900,function(){var p=HS[idx];hbub(HT[j],p[0],p[1]-112,1700);sparkle(p[0],p[1]-70,8,60);});});
+}
+function finale(){
+say('The lights of the whole village turn on.');
+lightsOn();
+HS.forEach(function(p,i){at(i*350,function(){sparkle(p[0],p[1]-40,10,70);});});
+at(600,function(){speak('Happy Birthday!');say('The whole village wishes Vo Thi S.Ny a Happy Birthday.');});
+housesWish(600);
+var T=6800;
+at(T,function(){say('Santa is coming again.');sleigh.classList.remove('leave','landed','go');void sleigh.getBoundingClientRect();sleigh.classList.add('go');});
+at(T+5200,function(){say('Santa has landed.');st=1;sleigh.classList.remove('go');void sleigh.getBoundingClientRect();sleigh.classList.add('landed');});
+at(T+6900,function(){sparkle(480,690,14,70);});
+at(T+7100,function(){say('Santa steps out with your birthday cake.');st=2;santa.classList.add('gone');sgift.classList.add('gone');walker.classList.remove('walk','back','gave','talk');void walker.getBoundingClientRect();walker.classList.add('cakemode','walk');});
+at(T+9100,function(){walker.classList.add('talk');bubble('I brought your birthday cake!',340,545,'d',2800);speak('I brought your birthday cake!');sparkle(340,640,14,80);});
+at(T+12000,function(){bubble('Please cut the cake!',340,545,'d',2800);speak('Please cut the cake!');say('Santa asks you to cut the cake.');});
+at(T+13300,function(){walker.classList.add('gave');cake.classList.add('show');sparkle(398,745,20,90);});
+at(T+13600,function(){walker.classList.remove('talk');say('Santa waits beside you while you cut the cake.');});
+at(T+14500,function(){cake.classList.add('ready');cake.setAttribute('tabindex','0');say('Tap the cake to cut it.');bubble('Tap the cake to cut it!',398,610,'d',3500);});
+}
+function cutCake(){
+if(!cake.classList.contains('ready')||cake.classList.contains('cut'))return;
+cake.classList.add('out');say('The candles are blown out.');
+at(600,function(){cake.classList.add('cut');say('The cake is being cut.');});
+at(1900,function(){
+sparkle(410,740,40,220);balloons();
+for(var i=0;i<14;i++)flyer('<path d="M0 8C-14 -4 -10 -16 0 -9C10 -16 14 -4 0 8Z" fill="'+BC[i%BC.length]+'"/>',398+(Math.random()-.5)*60,730,(Math.random()-.5)*420,-(150+Math.random()*300),2800+Math.random()*1200,Math.random()*800,1.5+Math.random());
+bubble('Happy Birthday, Vo Thi S.Ny!',398,610,'d',4200);speak('Happy Birthday, Vo Thi S.Ny!');
+say('The cake is cut. Happy Birthday, Vo Thi S.Ny!');
+housesWish(1200);at(3300,secondGift);
+});
+}
+bind(cake,cutCake);
+/* After the cake is cut, Santa gives one more gift and then leaves */
+var g2=$('g2');
+function secondGift(){
+say('Santa has another gift for you.');
+walker.classList.remove('cakemode','gave');walker.classList.add('talk');
+bubble('Here is another gift for you!',340,545,'d',2800);speak('Here is another gift for you!');sparkle(340,640,16,90);
+at(3000,function(){walker.classList.add('gave');g2.classList.add('show');sparkle(490,745,20,90);});
+at(5000,function(){walker.classList.remove('talk','walk');walker.classList.add('back');say('Santa walks back to the sleigh.');});
+at(6700,function(){santa.classList.remove('gone');st=1;});
+at(6900,function(){sleigh.classList.remove('landed');sleigh.classList.add('leave');});
+at(7500,function(){g2.classList.add('ready');g2.setAttribute('tabindex','0');say('Tap the new gift to open it.');bubble('Tap the gift to open it!',490,610,'d',3500);});
+}
+function openG2(){
+if(!g2.classList.contains('ready')||g2.classList.contains('open'))return;
+g2.classList.add('open');say('The second gift is open. Surprise!');speak('Surprise!');
+sparkle(490,735,34,190);
+for(var i=0;i<12;i++)flyer('<path d="M0 8C-14 -4 -10 -16 0 -9C10 -16 14 -4 0 8Z" fill="'+BC[i%BC.length]+'"/>',490+(Math.random()-.5)*40,730,(Math.random()-.5)*380,-(140+Math.random()*260),2600+Math.random()*1000,Math.random()*600,1.5+Math.random());
+at(500,function(){bubble('Surprise! Happy Birthday!',490,610,'d',3200);});
+}
+bind(g2,openG2);
+/* Tap the card to close its cover; the card then goes away */
+card.addEventListener('click',function(e){
+e.stopPropagation();
+if(cwrap.classList.contains('leaving'))return;
+if(card.classList.contains('is-opened')){
+card.classList.remove('is-opened');
+cclick.classList.remove('is-hidden');
+at(1000,closeCard);
+}else{
+card.classList.add('is-opened');
+cclick.classList.add('is-hidden');
+}
+});
+$('dim').addEventListener('click',closeCard);
+window.addEventListener('resize',sizeCard);
+$('replay').addEventListener('click',start);
+start();
+})();
+</script>
+</body>
+</html>
